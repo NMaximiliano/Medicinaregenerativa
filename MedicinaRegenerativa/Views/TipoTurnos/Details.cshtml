@@ -1,0 +1,43 @@
+﻿@model MedicinaRegenerativa.Models.TipoTurnos
+
+@{
+    ViewBag.Title = "Tipo Turnos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalle Tipo Turnos</h2>
+
+<div>
+    <h4>Tipo Turnos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCarga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCarga)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idTipoTurno }) |
+    @Html.ActionLink("Volver al Listado", "Index")
+</p>

@@ -1,0 +1,118 @@
+﻿@model MedicinaRegenerativa.Models.Pacientes
+
+@{
+    ViewBag.Title = "Crear Paciente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Crear Paciente</h2>
+@*<script src="~/Scripts/jquery-ui.js"></script>
+<link href="~/Content/jquery/jquery-ui.css" rel="stylesheet">*@
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrapDateTimePicker")
+@Scripts.Render("~/bundles/jqueryval")
+}
+@Styles.Render("~/Content/cssFechas")
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Pacientes</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.NombreCompleto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NombreCompleto, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NombreCompleto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Documento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Documento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Documento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Direccion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*<div class='input-group date' id='datetimepicker1'>*@
+                    @*@Html.TextBoxFor(model => model.FechaNacimiento, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @class = "form-control" /*disabled = "disabled", @readonly = "readonly" */})*@
+                    @*<span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>*@
+                @*</div>*@
+                @Html.EditorFor(model => model.FechaNacimiento, "", new { htmlAttributes = new { @class = "form-control" } })                                
+                
+                @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.FechaCarga, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FechaCarga, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FechaCarga, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Crear" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Volver al Listado", "Index")
+</div>
+
+<script type="text/javascript">
+    /*$(function () {
+        $("#FechaNacimiento").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            format: "dd/mm/yyyy",
+            language: "es",
+        });
+    });*/    
+    $(function () {
+        $('#FechaNacimiento').datetimepicker({
+            format: "YYYY/MM/DD",
+            /*extraFormats: ['DD/MM/YY'],*/ viewMode: 'years'
+        });
+       // $('#datetimepicker1').data("DateTimePicker").show();
+    });
+</script>
+

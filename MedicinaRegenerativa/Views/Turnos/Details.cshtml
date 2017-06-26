@@ -1,0 +1,83 @@
+﻿@model MedicinaRegenerativa.Models.Turnos
+
+@{
+    ViewBag.Title = "Turnos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalle</h2>
+
+<div>
+    <h4>Turnos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TiempoReservado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TiempoReservado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCarga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCarga)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pacientes.NombreCompleto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pacientes.NombreCompleto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoTurnos.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoTurnos.Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idTurno }) |
+    @Html.ActionLink("Volver al Listado", "Index")
+</p>

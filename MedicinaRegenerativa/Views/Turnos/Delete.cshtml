@@ -1,0 +1,89 @@
+﻿@model MedicinaRegenerativa.Models.Turnos
+
+@{
+    ViewBag.Title = "turnos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Borrar</h2>
+
+<h3>Esta seguro que quiere borrar el turno?</h3>
+<div>
+    <h4>Turnos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TiempoReservado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TiempoReservado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCarga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCarga)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pacientes.NombreCompleto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pacientes.NombreCompleto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoTurnos.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoTurnos.Descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Volver al Listado", "Index")
+        </div>
+    }
+</div>

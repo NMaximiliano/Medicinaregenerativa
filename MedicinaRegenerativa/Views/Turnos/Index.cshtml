@@ -1,0 +1,76 @@
+﻿@model IEnumerable<MedicinaRegenerativa.Models.Turnos>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listado de Turnos</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TiempoReservado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCarga)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pacientes.NombreCompleto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoTurnos.Descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hora)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TiempoReservado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Observaciones)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCarga)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pacientes.NombreCompleto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoTurnos.Descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.idTurno }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.idTurno }) |
+            @Html.ActionLink("Borrar", "Delete", new { id=item.idTurno })
+        </td>
+    </tr>
+}
+
+</table>

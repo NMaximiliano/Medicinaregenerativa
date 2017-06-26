@@ -1,0 +1,49 @@
+﻿@model MedicinaRegenerativa.Models.TipoTurnos
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Borrar Tipo Turno</h2>
+
+<h3>Esta seguro que quiere borrar el valor?</h3>
+<div>
+    <h4>Tipo de Turnos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCarga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCarga)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver al Listado", "Index")
+        </div>
+    }
+</div>

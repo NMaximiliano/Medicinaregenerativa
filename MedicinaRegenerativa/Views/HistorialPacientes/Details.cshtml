@@ -1,0 +1,67 @@
+﻿@model MedicinaRegenerativa.Models.HistorialPacientes
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HistorialPacientes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Historia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Historia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MedicacionRecibida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MedicacionRecibida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCarga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCarga)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pacientes.NombreCompleto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pacientes.NombreCompleto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Turnos.Hora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Turnos.Hora)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idHistorialPaciente }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

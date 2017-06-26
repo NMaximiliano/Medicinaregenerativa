@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_A06236_turnosMedicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Calendario">
+    <Key>
+      <PropertyRef Name="idCalendario" />
+    </Key>
+    <Property Name="idCalendario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Hora" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="idTurno" Type="Int32" Nullable="false" />
+    <Property Name="FechaCarga" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Turnos" Relationship="Self.FK_dbo_Turnos_dbo_Turnos" FromRole="Calendario" ToRole="Turnos" />
+  </EntityType>
+  <EntityType Name="HistorialPacientes">
+    <Key>
+      <PropertyRef Name="idHistorialPaciente" />
+    </Key>
+    <Property Name="idHistorialPaciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Historia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="MedicacionRecibida" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="idPaciente" Type="Int32" Nullable="false" />
+    <Property Name="idTurno" Type="Int32" Nullable="false" />
+    <Property Name="FechaCarga" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Pacientes" Relationship="Self.FK_dbo_HistorialPacientes_dbo_Pacientes" FromRole="HistorialPacientes" ToRole="Pacientes" />
+    <NavigationProperty Name="Turnos" Relationship="Self.FK_dbo_HistorialPacientes_dbo_Turnos" FromRole="HistorialPacientes" ToRole="Turnos" />
+  </EntityType>
+  <EntityType Name="Pacientes">
+    <Key>
+      <PropertyRef Name="idPaciente" />
+    </Key>
+    <Property Name="idPaciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreCompleto" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
+    <Property Name="Documento" Type="String" MaxLength="19" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+    <Property Name="FechaCarga" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HistorialPacientes" Relationship="Self.FK_dbo_HistorialPacientes_dbo_Pacientes" FromRole="Pacientes" ToRole="HistorialPacientes" />
+    <NavigationProperty Name="Turnos" Relationship="Self.FK_dbo_Turnos_dbo_Pacientes" FromRole="Pacientes" ToRole="Turnos" />
+  </EntityType>
+  <EntityType Name="TipoTurnos">
+    <Key>
+      <PropertyRef Name="idTipoTurno" />
+    </Key>
+    <Property Name="idTipoTurno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCarga" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Turnos" Relationship="Self.FK_dbo_Turnos_dbo_TipoTurnos" FromRole="TipoTurnos" ToRole="Turnos" />
+  </EntityType>
+  <EntityType Name="Turnos">
+    <Key>
+      <PropertyRef Name="idTurno" />
+    </Key>
+    <Property Name="idTurno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Hora" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TiempoReservado" Type="Byte" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="idPaciente" Type="Int32" Nullable="false" />
+    <Property Name="idTipoTurno" Type="Int32" Nullable="false" />
+    <Property Name="FechaCarga" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Calendario" Relationship="Self.FK_dbo_Turnos_dbo_Turnos" FromRole="Turnos" ToRole="Calendario" />
+    <NavigationProperty Name="HistorialPacientes" Relationship="Self.FK_dbo_HistorialPacientes_dbo_Turnos" FromRole="Turnos" ToRole="HistorialPacientes" />
+    <NavigationProperty Name="Pacientes" Relationship="Self.FK_dbo_Turnos_dbo_Pacientes" FromRole="Turnos" ToRole="Pacientes" />
+    <NavigationProperty Name="TipoTurnos" Relationship="Self.FK_dbo_Turnos_dbo_TipoTurnos" FromRole="Turnos" ToRole="TipoTurnos" />
+  </EntityType>
+  <Association Name="FK_dbo_Turnos_dbo_Turnos">
+    <End Role="Turnos" Type="Self.Turnos" Multiplicity="1" />
+    <End Role="Calendario" Type="Self.Calendario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Turnos">
+        <PropertyRef Name="idTurno" />
+      </Principal>
+      <Dependent Role="Calendario">
+        <PropertyRef Name="idTurno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_HistorialPacientes_dbo_Pacientes">
+    <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
+    <End Role="HistorialPacientes" Type="Self.HistorialPacientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pacientes">
+        <PropertyRef Name="idPaciente" />
+      </Principal>
+      <Dependent Role="HistorialPacientes">
+        <PropertyRef Name="idPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_HistorialPacientes_dbo_Turnos">
+    <End Role="Turnos" Type="Self.Turnos" Multiplicity="1" />
+    <End Role="HistorialPacientes" Type="Self.HistorialPacientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Turnos">
+        <PropertyRef Name="idTurno" />
+      </Principal>
+      <Dependent Role="HistorialPacientes">
+        <PropertyRef Name="idTurno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Turnos_dbo_Pacientes">
+    <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
+    <End Role="Turnos" Type="Self.Turnos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pacientes">
+        <PropertyRef Name="idPaciente" />
+      </Principal>
+      <Dependent Role="Turnos">
+        <PropertyRef Name="idPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Turnos_dbo_TipoTurnos">
+    <End Role="TipoTurnos" Type="Self.TipoTurnos" Multiplicity="1" />
+    <End Role="Turnos" Type="Self.Turnos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoTurnos">
+        <PropertyRef Name="idTipoTurno" />
+      </Principal>
+      <Dependent Role="Turnos">
+        <PropertyRef Name="idTipoTurno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB_A06236_turnosMedicEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Calendario" EntityType="Self.Calendario" />
+    <EntitySet Name="HistorialPacientes" EntityType="Self.HistorialPacientes" />
+    <EntitySet Name="Pacientes" EntityType="Self.Pacientes" />
+    <EntitySet Name="TipoTurnos" EntityType="Self.TipoTurnos" />
+    <EntitySet Name="Turnos" EntityType="Self.Turnos" />
+    <AssociationSet Name="FK_dbo_Turnos_dbo_Turnos" Association="Self.FK_dbo_Turnos_dbo_Turnos">
+      <End Role="Turnos" EntitySet="Turnos" />
+      <End Role="Calendario" EntitySet="Calendario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_HistorialPacientes_dbo_Pacientes" Association="Self.FK_dbo_HistorialPacientes_dbo_Pacientes">
+      <End Role="Pacientes" EntitySet="Pacientes" />
+      <End Role="HistorialPacientes" EntitySet="HistorialPacientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_HistorialPacientes_dbo_Turnos" Association="Self.FK_dbo_HistorialPacientes_dbo_Turnos">
+      <End Role="Turnos" EntitySet="Turnos" />
+      <End Role="HistorialPacientes" EntitySet="HistorialPacientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Turnos_dbo_Pacientes" Association="Self.FK_dbo_Turnos_dbo_Pacientes">
+      <End Role="Pacientes" EntitySet="Pacientes" />
+      <End Role="Turnos" EntitySet="Turnos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Turnos_dbo_TipoTurnos" Association="Self.FK_dbo_Turnos_dbo_TipoTurnos">
+      <End Role="TipoTurnos" EntitySet="TipoTurnos" />
+      <End Role="Turnos" EntitySet="Turnos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

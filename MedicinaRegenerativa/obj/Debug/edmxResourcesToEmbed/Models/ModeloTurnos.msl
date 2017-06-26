@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_A06236_turnosMedicModelStoreContainer" CdmEntityContainer="DB_A06236_turnosMedicEntities">
+    <EntitySetMapping Name="Calendario">
+      <EntityTypeMapping TypeName="DB_A06236_turnosMedicModel.Calendario">
+        <MappingFragment StoreEntitySet="Calendario">
+          <ScalarProperty Name="idCalendario" ColumnName="idCalendario" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Hora" ColumnName="Hora" />
+          <ScalarProperty Name="idTurno" ColumnName="idTurno" />
+          <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HistorialPacientes">
+      <EntityTypeMapping TypeName="DB_A06236_turnosMedicModel.HistorialPacientes">
+        <MappingFragment StoreEntitySet="HistorialPacientes">
+          <ScalarProperty Name="idHistorialPaciente" ColumnName="idHistorialPaciente" />
+          <ScalarProperty Name="Historia" ColumnName="Historia" />
+          <ScalarProperty Name="MedicacionRecibida" ColumnName="MedicacionRecibida" />
+          <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+          <ScalarProperty Name="idTurno" ColumnName="idTurno" />
+          <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pacientes">
+      <EntityTypeMapping TypeName="DB_A06236_turnosMedicModel.Pacientes">
+        <MappingFragment StoreEntitySet="Pacientes">
+          <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+          <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+          <ScalarProperty Name="Documento" ColumnName="Documento" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoTurnos">
+      <EntityTypeMapping TypeName="DB_A06236_turnosMedicModel.TipoTurnos">
+        <MappingFragment StoreEntitySet="TipoTurnos">
+          <ScalarProperty Name="idTipoTurno" ColumnName="idTipoTurno" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Turnos">
+      <EntityTypeMapping TypeName="DB_A06236_turnosMedicModel.Turnos">
+        <MappingFragment StoreEntitySet="Turnos">
+          <ScalarProperty Name="idTurno" ColumnName="idTurno" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Hora" ColumnName="Hora" />
+          <ScalarProperty Name="TiempoReservado" ColumnName="TiempoReservado" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+          <ScalarProperty Name="idTipoTurno" ColumnName="idTipoTurno" />
+          <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
