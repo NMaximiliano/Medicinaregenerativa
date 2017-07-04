@@ -27,6 +27,7 @@ namespace MedicinaRegenerativa
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapDateTimePicker").Include(                      
                         "~/Scripts/moment.js",
+                        "~/Scripts/momentLocale.js",
                         "~/Scripts/bootstrap-datetimepicker.min.js"
                       ));
 

@@ -65,7 +65,14 @@ namespace MedicinaRegenerativa.Controllers
             ViewBag.idTipoTurno = new SelectList(db.TipoTurnos, "idTipoTurno", "Descripcion", turnos.idTipoTurno);
             return View(turnos);
         }
-
+        /*[HttpPost]*/
+        public /*JsonResult */ActionResult  buscarXFecha(List<String> fecha)
+        {
+            // some code
+           // string fechaIngresada = fecha.ToString();
+            string fechaIngresada = fecha[0].ToString();
+            return Json(new { success = true, message = "fecha: " + fechaIngresada  }, JsonRequestBehavior.AllowGet);
+        }
         // GET: Turnos/Edit/5
         public ActionResult Edit(int? id)
         {

@@ -4,12 +4,73 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrapDateTimePicker")
+    @Scripts.Render("~/bundles/jqueryval")
+}
+@Styles.Render("~/Content/cssFechas")
 <h2>Listado de Turnos</h2>
 
 <p>
     @Html.ActionLink("Crear Nuevo", "Create")
 </p>
+<section id="FiltrosTurnos">
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <h4>Filtros</h4>
+            <div style="overflow:hidden;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div id="datetimepicker12"></div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker12').datetimepicker({
+                            /*calendarWeeks: true,*/
+                            format: 'L',
+                            
+                            inline: true,                            
+                            sideBySide: true
+                        });
+                        /*.on('dp.show', function () {
+                            $('a.btn[data-action="incrementMinutes"], a.btn[data-action="decrementMinutes"]').removeAttr('data-action').attr('disabled', true);
+                            $('span.timepicker-minute[data-action="showMinutes"]').removeAttr('data-action').attr('disabled', true).text('00');
+                        });                      */
+                        $('#datetimepicker12').on('dp.change', function (e) {                           
+                            var formatedValue = [e.date.format('YYYY/MM/DD')];//[e.date.format(e.date._f)];//e.date.format(e.date._f);
+                            console.log(formatedValue);
+                            
+                            var fecha = // JSON.stringify(formatedValue);
+                            $.ajax({
+                                url: '@Url.Action("buscarXFecha")', // to get the right path to controller from TableRoutes of Asp.Net MVC
+                                dataType: "json", //to work with json format
+                                type: "POST", //to do a post request 
+                                contentType: 'application/json; charset=utf-8', //define a contentType of your request
+                                cache: false, //avoid caching results
+                                data:  JSON.stringify(formatedValue) ,
+                                success: function (data) {
+                                    // data is your result from controller
+                                    if (data.success) {
+                                        alert(data.message);
+                                    }
+                                },
+                                error: function (xhr) {
+                                    alert('error');
+                                }
+                            });
+                        })
+                    });
+                    
+
+                </script>
+            </div>
+        </div>
+    }
+</section>
 <table class="table">
     <tr>
         <th>
@@ -39,38 +100,39 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hora)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TiempoReservado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Observaciones)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaCarga)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pacientes.NombreCompleto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoTurnos.Descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.idTurno }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.idTurno }) |
-            @Html.ActionLink("Borrar", "Delete", new { id=item.idTurno })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TiempoReservado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observaciones)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaCarga)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pacientes.NombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoTurnos.Descripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.idTurno }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.idTurno }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.idTurno })
+            </td>
+        </tr>
+    }
 
 </table>
