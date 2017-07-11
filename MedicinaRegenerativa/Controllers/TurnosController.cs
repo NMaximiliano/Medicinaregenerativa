@@ -38,12 +38,22 @@ namespace MedicinaRegenerativa.Controllers
         }
 
         // GET: Turnos/Create
-        public ActionResult Create()
+        [HttpGet]
+        public ActionResult Create(string fecha)
         {
             ViewBag.idPaciente = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto");
             ViewBag.idTipoTurno = new SelectList(db.TipoTurnos, "idTipoTurno", "Descripcion");
+            Turnos Turnos = new Turnos();
+            Turnos.Fecha = Convert.ToDateTime(fecha);
+            ViewData.Model = Turnos;
             return View();
         }
+        [HttpPost]
+        public ActionResult CreateNuevo(string fechaBusqueda)
+        {                        
+            return RedirectToAction("Create","Turnos", new { fecha = fechaBusqueda });            
+        }
+
 
         // POST: Turnos/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
@@ -65,13 +75,18 @@ namespace MedicinaRegenerativa.Controllers
             ViewBag.idTipoTurno = new SelectList(db.TipoTurnos, "idTipoTurno", "Descripcion", turnos.idTipoTurno);
             return View(turnos);
         }
-        /*[HttpPost]*/
+        [HttpPost]
         public /*JsonResult */ActionResult  buscarXFecha(List<String> fecha)
         {
             // some code
            // string fechaIngresada = fecha.ToString();
             string fechaIngresada = fecha[0].ToString();
-            return Json(new { success = true, message = "fecha: " + fechaIngresada  }, JsonRequestBehavior.AllowGet);
+            DateTime fechaIng = Convert.ToDateTime(fechaIngresada);
+           
+            
+            var turnos = db.Turnos.Where(x => x.Fecha == fechaIng).Select(c => new { Fecha = c.Fecha.ToString(), Hora = c.Hora, Observaciones = c.Observaciones, TiempoReserva = c.TiempoReservado, Paciente = c.Pacientes.NombreCompleto, TipoTurno = c.TipoTurnos.Descripcion })
+                        .ToList(); 
+            return Json(new { success = true, message = "fecha: " + fechaIngresada , turnos = turnos }/*, JsonRequestBehavior.AllowGet*/);
         }
         // GET: Turnos/Edit/5
         public ActionResult Edit(int? id)
