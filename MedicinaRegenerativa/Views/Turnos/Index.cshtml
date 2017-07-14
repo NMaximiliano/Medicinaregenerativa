@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    String fechaHoy = DateTime.Now.ToString("yyyy/MM/dd");
 }
 @section Scripts {
     @Scripts.Render("~/bundles/bootstrapDateTimePicker")
@@ -15,8 +16,8 @@
 <p>
     @*@Html.ActionLink("Crear Nuevo", "Create", new { fecha = "2017/11/15" })*@
     
-    @Html.Hidden("fechaBusqueda", "20170521")
-    <input type="submit" value="Crear Nuevo" />
+    @Html.Hidden("fechaBusqueda", fechaHoy)
+    <input type="submit" value="Crear Nuevo" class="btn btn-default" />
 </p>
 }
 <section id="FiltrosTurnos">
@@ -34,7 +35,16 @@
                 
                 
                 <script type="text/javascript">
-                    
+                    function parseJsonDate(jsonDateString) {
+                        var currentTime = new Date(parseInt(jsonDateString.replace('/Date(', '')))
+                        var month = currentTime.getMonth() + 1
+                        var day = currentTime.getDate()
+                        var year = currentTime.getFullYear()
+                        var date = day + "/" + month + "/" + year
+                        return date
+                        //return new Date(parseInt(jsonDateString.replace('/Date(', '')));
+
+                    }
                     $(function () {
                         $('#datetimepicker12').datetimepicker({
                             /*calendarWeeks: true,*/
@@ -63,10 +73,10 @@
                                     if (data.success) {
 
                                         
-                                        var html = '<table class="table"><tr><th>Fecha</th><th>Hora</th><th>Tiempo Reservado</th><th>Observaciones</th><th>Fecha de Carga</th><th>Usuario</th><th>Nombre Completo</th><th>Descripcion</th><th></th></tr>';
+                                        var html = '<table class="table"><tr><th>Fecha</th><th>Hora</th><th>Tiempo Reservado</th><th>Observaciones</th><th>Nombre Completo</th><th>Tipo de Turno</th><th></th></tr>';
                                         $.each(data.turnos, function (key, value) {
                                             
-                                            html += '<tr><td>' + data.turnos[key].Fecha + '</td><td>' + data.turnos[key].Hora + '</td><td>' + data.turnos[key].TiempoReserva + '</td><td>' + data.turnos[key].Observaciones + '</td><td>6/7/2017 4:15:32 p. m.</td><td></td><td>Pepe Fontana</td><td>Traumatolog&#237;a</td><td><a href="/Turnos/Edit/1">Editar</a> |<a href="/Turnos/Details/1">Detalles</a> |<a href="/Turnos/Delete/1">Borrar</a></td></tr>';
+                                            html += '<tr><td>' + parseJsonDate(data.turnos[key].Fecha) + '</td><td>' + data.turnos[key].Hora + '</td><td>' + data.turnos[key].TiempoReserva + '</td><td>' + data.turnos[key].Observaciones + '</td><td>' + data.turnos[key].Paciente + '</td><td>' + data.turnos[key].TipoTurno + '</td><td><a href="/Turnos/Edit/' + data.turnos[key].Id + '">Editar</a> |<a href="/Turnos/Details/' + data.turnos[key].Id + '">Detalles</a> |<a href="/Turnos/Delete/' + data.turnos[key].Id + '">Borrar</a></td></tr>';
                                         });
                                         html += '</table>';
                                         $('#Grilla').html(html);
@@ -101,12 +111,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Observaciones)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.FechaCarga)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.UserId)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Pacientes.NombreCompleto)
             </th>
@@ -130,12 +140,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Observaciones)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.FechaCarga)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.UserId)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Pacientes.NombreCompleto)
                 </td>

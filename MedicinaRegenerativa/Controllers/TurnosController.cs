@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MedicinaRegenerativa.Models;
 using Microsoft.AspNet.Identity;
+using System.Globalization;
 
 namespace MedicinaRegenerativa.Controllers
 {
@@ -18,8 +19,9 @@ namespace MedicinaRegenerativa.Controllers
         // GET: Turnos
         public ActionResult Index()
         {
+            var today = DateTime.Today;
             var turnos = db.Turnos.Include(t => t.Pacientes).Include(t => t.TipoTurnos);
-            return View(turnos.ToList());
+            return View(turnos.Where(x=> DbFunctions.TruncateTime(x.Fecha) == today).ToList());
         }
 
         // GET: Turnos/Details/5
@@ -84,8 +86,9 @@ namespace MedicinaRegenerativa.Controllers
             DateTime fechaIng = Convert.ToDateTime(fechaIngresada);
            
             
-            var turnos = db.Turnos.Where(x => x.Fecha == fechaIng).Select(c => new { Fecha = c.Fecha.ToString(), Hora = c.Hora, Observaciones = c.Observaciones, TiempoReserva = c.TiempoReservado, Paciente = c.Pacientes.NombreCompleto, TipoTurno = c.TipoTurnos.Descripcion })
+            var turnos = db.Turnos.Where(x => x.Fecha == fechaIng).Select(c => new { Fecha = c.Fecha.Value, Hora = c.Hora, Observaciones = c.Observaciones, TiempoReserva = c.TiempoReservado, Paciente = c.Pacientes.NombreCompleto, TipoTurno = c.TipoTurnos.Descripcion, Id = c.idTurno })
                         .ToList(); 
+            
             return Json(new { success = true, message = "fecha: " + fechaIngresada , turnos = turnos }/*, JsonRequestBehavior.AllowGet*/);
         }
         // GET: Turnos/Edit/5
