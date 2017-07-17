@@ -29,7 +29,7 @@ namespace MedicinaRegenerativa.Models
         public string Direccion { get; set; }
         public string Telefono { get; set; }
         [Display(Name = "Fecha de Nacimiento")]
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
         [Display(Name = "Fecha de Carga")]
