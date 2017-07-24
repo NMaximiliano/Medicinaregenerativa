@@ -222,6 +222,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloTurnos.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ObrasSociales.cs">
+      <DependentUpon>ModeloTurnos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Pacientes.cs">
       <DependentUpon>ModeloTurnos.tt</DependentUpon>
     </Compile>

@@ -25,7 +25,13 @@
             @Html.DisplayNameFor(model => model.Telefono)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.mail)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </th>
+        <th>
+            Obra Social
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.FechaCarga)
@@ -33,7 +39,7 @@
         <th>
             @Html.DisplayNameFor(model => model.UserId)
         </th>*@
-        <th></th>
+        <th>Acciones</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -51,7 +57,13 @@
             @Html.DisplayFor(modelItem => item.Telefono)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.mail)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.FechaNacimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ObrasSociales.Descripcion)
         </td>
         @*<td>
             @Html.DisplayFor(modelItem => item.FechaCarga)

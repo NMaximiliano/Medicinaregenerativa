@@ -12,15 +12,20 @@ namespace MedicinaRegenerativa.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Calendario
+    public partial class ObrasSociales
     {
-        public int idCalendario { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
-        public string Hora { get; set; }
-        public int idTurno { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ObrasSociales()
+        {
+            this.Pacientes = new HashSet<Pacientes>();
+        }
+    
+        public int idObraSocial { get; set; }
+        public string Descripcion { get; set; }
         public Nullable<System.DateTime> FechaCarga { get; set; }
         public string UserId { get; set; }
     
-        public virtual Turnos Turnos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pacientes> Pacientes { get; set; }
     }
 }

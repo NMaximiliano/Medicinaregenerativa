@@ -30,5 +30,6 @@ namespace MedicinaRegenerativa.Models
         public virtual DbSet<Pacientes> Pacientes { get; set; }
         public virtual DbSet<TipoTurnos> TipoTurnos { get; set; }
         public virtual DbSet<Turnos> Turnos { get; set; }
+        public virtual DbSet<ObrasSociales> ObrasSociales { get; set; }
     }
 }

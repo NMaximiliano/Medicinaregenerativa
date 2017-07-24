@@ -28,6 +28,15 @@
           <Property Name="FechaCarga" Type="datetime" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="ObrasSociales">
+          <Key>
+            <PropertyRef Name="idObraSocial" />
+          </Key>
+          <Property Name="idObraSocial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="600" />
+          <Property Name="FechaCarga" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="Pacientes">
           <Key>
             <PropertyRef Name="idPaciente" />
@@ -40,6 +49,8 @@
           <Property Name="FechaNacimiento" Type="datetime" />
           <Property Name="FechaCarga" Type="datetime" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="mail" Type="varchar" MaxLength="100" />
+          <Property Name="idObraSocial" Type="int" />
         </EntityType>
         <EntityType Name="TipoTurnos">
           <Key>
@@ -88,6 +99,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_Pacientes_dbo_ObrasSociales">
+          <End Role="ObrasSociales" Type="Self.ObrasSociales" Multiplicity="0..1" />
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObrasSociales">
+              <PropertyRef Name="idObraSocial" />
+            </Principal>
+            <Dependent Role="Pacientes">
+              <PropertyRef Name="idObraSocial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Turnos_dbo_Pacientes">
           <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
           <End Role="Turnos" Type="Self.Turnos" Multiplicity="*" />
@@ -127,6 +150,7 @@
         <EntityContainer Name="DB_A06236_turnosMedicModelStoreContainer">
           <EntitySet Name="Calendario" EntityType="Self.Calendario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HistorialPacientes" EntityType="Self.HistorialPacientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ObrasSociales" EntityType="Self.ObrasSociales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pacientes" EntityType="Self.Pacientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoTurnos" EntityType="Self.TipoTurnos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Turnos" EntityType="Self.Turnos" Schema="dbo" store:Type="Tables" />
@@ -137,6 +161,10 @@
           <AssociationSet Name="FK_dbo_HistorialPacientes_dbo_Turnos" Association="Self.FK_dbo_HistorialPacientes_dbo_Turnos">
             <End Role="Turnos" EntitySet="Turnos" />
             <End Role="HistorialPacientes" EntitySet="HistorialPacientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pacientes_dbo_ObrasSociales" Association="Self.FK_dbo_Pacientes_dbo_ObrasSociales">
+            <End Role="ObrasSociales" EntitySet="ObrasSociales" />
+            <End Role="Pacientes" EntitySet="Pacientes" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Turnos_dbo_Pacientes" Association="Self.FK_dbo_Turnos_dbo_Pacientes">
             <End Role="Pacientes" EntitySet="Pacientes" />
@@ -195,6 +223,9 @@
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HistorialPacientes" Relationship="Self.FK_dbo_HistorialPacientes_dbo_Pacientes" FromRole="Pacientes" ToRole="HistorialPacientes" />
           <NavigationProperty Name="Turnos" Relationship="Self.FK_dbo_Turnos_dbo_Pacientes" FromRole="Pacientes" ToRole="Turnos" />
+          <Property Name="mail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="idObraSocial" Type="Int32" />
+          <NavigationProperty Name="ObrasSociales" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Pacientes_dbo_ObrasSociales" FromRole="Pacientes" ToRole="ObrasSociales" />
         </EntityType>
         <EntityType Name="TipoTurnos">
           <Key>
@@ -310,7 +341,34 @@
             <End Role="TipoTurnos" EntitySet="TipoTurnos" />
             <End Role="Turnos" EntitySet="Turnos" />
           </AssociationSet>
+          <EntitySet Name="ObrasSociales" EntityType="DB_A06236_turnosMedicModel.ObrasSociales" />
+          <AssociationSet Name="FK_dbo_Pacientes_dbo_ObrasSociales" Association="DB_A06236_turnosMedicModel.FK_dbo_Pacientes_dbo_ObrasSociales">
+            <End Role="ObrasSociales" EntitySet="ObrasSociales" />
+            <End Role="Pacientes" EntitySet="Pacientes" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ObrasSociales">
+          <Key>
+            <PropertyRef Name="idObraSocial" />
+          </Key>
+          <Property Name="idObraSocial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCarga" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pacientes" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Pacientes_dbo_ObrasSociales" FromRole="ObrasSociales" ToRole="Pacientes" />
+        </EntityType>
+        <Association Name="FK_dbo_Pacientes_dbo_ObrasSociales">
+          <End Type="DB_A06236_turnosMedicModel.ObrasSociales" Role="ObrasSociales" Multiplicity="0..1" />
+          <End Type="DB_A06236_turnosMedicModel.Pacientes" Role="Pacientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObrasSociales">
+              <PropertyRef Name="idObraSocial" />
+            </Principal>
+            <Dependent Role="Pacientes">
+              <PropertyRef Name="idObraSocial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -345,6 +403,8 @@
           <EntitySetMapping Name="Pacientes">
             <EntityTypeMapping TypeName="DB_A06236_turnosMedicModel.Pacientes">
               <MappingFragment StoreEntitySet="Pacientes">
+                <ScalarProperty Name="idObraSocial" ColumnName="idObraSocial" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
                 <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
                 <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
                 <ScalarProperty Name="Documento" ColumnName="Documento" />
@@ -378,6 +438,16 @@
                 <ScalarProperty Name="idTipoTurno" ColumnName="idTipoTurno" />
                 <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ObrasSociales">
+            <EntityTypeMapping TypeName="DB_A06236_turnosMedicModel.ObrasSociales">
+              <MappingFragment StoreEntitySet="ObrasSociales">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="idObraSocial" ColumnName="idObraSocial" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -155,7 +155,8 @@
                 <td>
                     @Html.ActionLink("Editar", "Edit", new { id = item.idTurno }) |
                     @Html.ActionLink("Detalles", "Details", new { id = item.idTurno }) |
-                    @Html.ActionLink("Borrar", "Delete", new { id = item.idTurno })
+                    @Html.ActionLink("Borrar", "Delete", new { id = item.idTurno })     |               
+                    @Html.ActionLink("Historial", "Create", "HistorialPacientes", new { turno = item.idTurno }, new { turno = item.idPaciente })
                 </td>
             </tr>
         }

@@ -29,6 +29,8 @@
     <EntitySetMapping Name="Pacientes">
       <EntityTypeMapping TypeName="DB_A06236_turnosMedicModel.Pacientes">
         <MappingFragment StoreEntitySet="Pacientes">
+          <ScalarProperty Name="idObraSocial" ColumnName="idObraSocial" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
           <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
           <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
           <ScalarProperty Name="Documento" ColumnName="Documento" />
@@ -62,6 +64,16 @@
           <ScalarProperty Name="idTipoTurno" ColumnName="idTipoTurno" />
           <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObrasSociales">
+      <EntityTypeMapping TypeName="DB_A06236_turnosMedicModel.ObrasSociales">
+        <MappingFragment StoreEntitySet="ObrasSociales">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="idObraSocial" ColumnName="idObraSocial" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

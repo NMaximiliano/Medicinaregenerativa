@@ -35,10 +35,15 @@ namespace MedicinaRegenerativa.Models
         [Display(Name = "Fecha de Carga")]
         public Nullable<System.DateTime> FechaCarga { get; set; }
         public string UserId { get; set; }
+        [Display(Name = "Email")]        
+        [EmailAddress(ErrorMessage = "El formato del Mail es incorrecta")]
+        public string mail { get; set; }
+        public Nullable<int> idObraSocial { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HistorialPacientes> HistorialPacientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Turnos> Turnos { get; set; }
+        public virtual ObrasSociales ObrasSociales { get; set; }
     }
 }

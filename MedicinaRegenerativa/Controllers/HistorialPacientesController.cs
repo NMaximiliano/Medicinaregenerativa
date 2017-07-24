@@ -38,10 +38,12 @@ namespace MedicinaRegenerativa.Controllers
         }
 
         // GET: HistorialPacientes/Create
-        public ActionResult Create()
+        public ActionResult Create(int? turno)
         {
-            ViewBag.idPaciente = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto");
-            ViewBag.idTurno = new SelectList(db.Turnos, "idTurno", "Hora");
+            Turnos Turnos = db.Turnos.Find(turno);
+            
+            ViewBag.idPaciente = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto", Turnos.idPaciente);
+            ViewBag.idTurno = new SelectList(db.Turnos, "idTurno", "Observaciones", turno);            
             return View();
         }
 
@@ -79,7 +81,7 @@ namespace MedicinaRegenerativa.Controllers
                 return HttpNotFound();
             }
             ViewBag.idPaciente = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto", historialPacientes.idPaciente);
-            ViewBag.idTurno = new SelectList(db.Turnos, "idTurno", "Hora", historialPacientes.idTurno);
+            ViewBag.idTurno = new SelectList(db.Turnos, "idTurno", "Fecha", historialPacientes.idTurno);
             return View(historialPacientes);
         }
 
@@ -99,7 +101,7 @@ namespace MedicinaRegenerativa.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.idPaciente = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto", historialPacientes.idPaciente);
-            ViewBag.idTurno = new SelectList(db.Turnos, "idTurno", "Hora", historialPacientes.idTurno);
+            ViewBag.idTurno = new SelectList(db.Turnos, "idTurno", "Fecha", historialPacientes.idTurno);
             return View(historialPacientes);
         }
 

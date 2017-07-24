@@ -20,6 +20,7 @@ namespace MedicinaRegenerativa.Controllers
         public ActionResult Index()
         {
 //            HttpContext.Session["culture"] = "es-ES";
+
             return View(db.Pacientes.ToList());
         }
 
@@ -41,6 +42,8 @@ namespace MedicinaRegenerativa.Controllers
         // GET: Pacientes/Create
         public ActionResult Create()
         {
+            
+            ViewBag.idObraSocial = new SelectList(db.ObrasSociales, "idObraSocial", "Descripcion");
             HttpContext.Session["culture"] = "es-ES";
             return View();
         }
@@ -50,7 +53,7 @@ namespace MedicinaRegenerativa.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idPaciente, NombreCompleto,Documento,Direccion,Telefono,FechaNacimiento")] Pacientes pacientes)
+        public ActionResult Create([Bind(Include = "idPaciente, NombreCompleto,Documento,Direccion,Telefono,FechaNacimiento, mail, idObraSocial")] Pacientes pacientes)
         {
             if (ModelState.IsValid)
             {
@@ -118,6 +121,7 @@ namespace MedicinaRegenerativa.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.idObraSocial = new SelectList(db.ObrasSociales, "idObraSocial", "Descripcion", pacientes.idObraSocial);
             return View(pacientes);
         }
 
@@ -126,7 +130,7 @@ namespace MedicinaRegenerativa.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idPaciente,NombreCompleto,Documento,Direccion,Telefono,FechaNacimiento,FechaCarga,UserId")] Pacientes pacientes)
+        public ActionResult Edit([Bind(Include = "idPaciente,NombreCompleto,Documento,Direccion,Telefono,FechaNacimiento,FechaCarga,UserId, mail, idObraSocial")] Pacientes pacientes)
         {
             if (ModelState.IsValid)
             {
@@ -136,6 +140,7 @@ namespace MedicinaRegenerativa.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.idObraSocial = new SelectList(db.ObrasSociales, "idObraSocial", "Descripcion", pacientes.idObraSocial);
             return View(pacientes);
         }
 

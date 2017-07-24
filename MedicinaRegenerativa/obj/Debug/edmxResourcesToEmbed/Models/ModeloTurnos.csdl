@@ -40,6 +40,9 @@
     <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="HistorialPacientes" Relationship="Self.FK_dbo_HistorialPacientes_dbo_Pacientes" FromRole="Pacientes" ToRole="HistorialPacientes" />
     <NavigationProperty Name="Turnos" Relationship="Self.FK_dbo_Turnos_dbo_Pacientes" FromRole="Pacientes" ToRole="Turnos" />
+    <Property Name="mail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="idObraSocial" Type="Int32" />
+    <NavigationProperty Name="ObrasSociales" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Pacientes_dbo_ObrasSociales" FromRole="Pacientes" ToRole="ObrasSociales" />
   </EntityType>
   <EntityType Name="TipoTurnos">
     <Key>
@@ -155,5 +158,32 @@
       <End Role="TipoTurnos" EntitySet="TipoTurnos" />
       <End Role="Turnos" EntitySet="Turnos" />
     </AssociationSet>
+    <EntitySet Name="ObrasSociales" EntityType="DB_A06236_turnosMedicModel.ObrasSociales" />
+    <AssociationSet Name="FK_dbo_Pacientes_dbo_ObrasSociales" Association="DB_A06236_turnosMedicModel.FK_dbo_Pacientes_dbo_ObrasSociales">
+      <End Role="ObrasSociales" EntitySet="ObrasSociales" />
+      <End Role="Pacientes" EntitySet="Pacientes" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="ObrasSociales">
+    <Key>
+      <PropertyRef Name="idObraSocial" />
+    </Key>
+    <Property Name="idObraSocial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCarga" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Pacientes" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Pacientes_dbo_ObrasSociales" FromRole="ObrasSociales" ToRole="Pacientes" />
+  </EntityType>
+  <Association Name="FK_dbo_Pacientes_dbo_ObrasSociales">
+    <End Type="DB_A06236_turnosMedicModel.ObrasSociales" Role="ObrasSociales" Multiplicity="0..1" />
+    <End Type="DB_A06236_turnosMedicModel.Pacientes" Role="Pacientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObrasSociales">
+        <PropertyRef Name="idObraSocial" />
+      </Principal>
+      <Dependent Role="Pacientes">
+        <PropertyRef Name="idObraSocial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
