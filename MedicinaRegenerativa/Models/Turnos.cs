@@ -24,7 +24,7 @@ namespace MedicinaRegenerativa.Models
     
         public int idTurno { get; set; }
         [Display(Name = "Fecha")]
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> Fecha { get; set; }
         public string Hora { get; set; }
