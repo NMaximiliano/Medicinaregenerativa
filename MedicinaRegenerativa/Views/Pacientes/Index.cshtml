@@ -10,73 +10,74 @@
 <p>
     @Html.ActionLink("Crear Nuevo", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NombreCompleto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Documento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Direccion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaNacimiento)
-        </th>
-        <th>
-            Obra Social
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.FechaCarga)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>*@
-        <th>Acciones</th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th>
+                Obra Social
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.FechaCarga)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>*@
+            <th>Acciones</th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NombreCompleto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Documento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Direccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaNacimiento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ObrasSociales.Descripcion)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.FechaCarga)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>*@
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.idPaciente }) |
-            @Html.ActionLink("Detalle", "Details", new { id=item.idPaciente }) |
-            @Html.ActionLink("Borrar", "Delete", new { id=item.idPaciente })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Documento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObrasSociales.Descripcion)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.FechaCarga)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.idPaciente }) |
+                    @Html.ActionLink("Detalle", "Details", new { id = item.idPaciente }) |
+                    @Html.ActionLink("Borrar", "Delete", new { id = item.idPaciente })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>

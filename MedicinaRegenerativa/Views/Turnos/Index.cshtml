@@ -48,15 +48,15 @@
                     $(function () {
                         $('#datetimepicker12').datetimepicker({
                             /*calendarWeeks: true,*/
-                            format: 'L',                            
-                            inline: true,                            
+                            format: 'L',
+                            inline: true,
                             sideBySide: true
                         });
                         /*.on('dp.show', function () {
                             $('a.btn[data-action="incrementMinutes"], a.btn[data-action="decrementMinutes"]').removeAttr('data-action').attr('disabled', true);
                             $('span.timepicker-minute[data-action="showMinutes"]').removeAttr('data-action').attr('disabled', true).text('00');
                         });                      */
-                        $('#datetimepicker12').on('dp.change', function (e) {                           
+                        $('#datetimepicker12').on('dp.change', function (e) {
                             var formatedValue = [e.date.format('YYYY/MM/DD')];//[e.date.format(e.date._f)];//e.date.format(e.date._f);
                             console.log(formatedValue);
                             $('#fechaBusqueda').val(formatedValue);
@@ -64,7 +64,7 @@
                             $.ajax({
                                 url: '@Url.Action("buscarXFecha")', // to get the right path to controller from TableRoutes of Asp.Net MVC
                                 dataType: "json", //to work with json format
-                                type: "POST", //to do a post request 
+                                type: "POST", //to do a post request
                                 contentType: 'application/json; charset=utf-8', //define a contentType of your request
                                 cache: false, //avoid caching results
                                 data:  JSON.stringify(formatedValue) ,
@@ -72,11 +72,11 @@
                                     // data is your result from controller
                                     if (data.success) {
 
-                                        
-                                        var html = '<table class="table"><tr><th>Fecha</th><th>Hora</th><th>Tiempo Reservado</th><th>Observaciones</th><th>Nombre Completo</th><th>Tipo de Turno</th><th></th></tr>';
+
+                                        var html = '<table class="table"><tr><th>Fecha</th><th>Hora</th><th>Tiempo Reservado</th><th>Observaciones</th><th>Nombre Completo</th><th>Tipo de Turno</th><th></th>Acciones</tr>';
                                         $.each(data.turnos, function (key, value) {
-                                            
-                                            html += '<tr><td>' + parseJsonDate(data.turnos[key].Fecha) + '</td><td>' + data.turnos[key].Hora + '</td><td>' + data.turnos[key].TiempoReserva + '</td><td>' + data.turnos[key].Observaciones + '</td><td>' + data.turnos[key].Paciente + '</td><td>' + data.turnos[key].TipoTurno + '</td><td><a href="/Turnos/Edit/' + data.turnos[key].Id + '">Editar</a> |<a href="/Turnos/Details/' + data.turnos[key].Id + '">Detalles</a> |<a href="/Turnos/Delete/' + data.turnos[key].Id + '">Borrar</a></td></tr>';
+
+                                            html += '<tr><td>' + parseJsonDate(data.turnos[key].Fecha) + '</td><td>' + data.turnos[key].Hora + '</td><td>' + data.turnos[key].TiempoReserva + '</td><td>' + data.turnos[key].Observaciones + '</td><td>' + data.turnos[key].Paciente + '</td><td>' + data.turnos[key].TipoTurno + '</td><td><a href="/Turnos/Edit/' + data.turnos[key].Id + '">Editar</a> |<a href="/Turnos/Details/' + data.turnos[key].Id + '">Detalles</a> |<a href="/Turnos/Delete/' + data.turnos[key].Id + '">Borrar</a>|<a href="/HistorialPacientes/Create?turno=' + data.turnos[key].Id + '">Historial</a></td></tr>';
                                         });
                                         html += '</table>';
                                         $('#Grilla').html(html);
@@ -89,7 +89,7 @@
                             });
                         })
                     });
-                    
+
 
                 </script>
             </div>

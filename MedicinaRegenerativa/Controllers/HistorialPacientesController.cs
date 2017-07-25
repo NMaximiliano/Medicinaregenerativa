@@ -40,10 +40,21 @@ namespace MedicinaRegenerativa.Controllers
         // GET: HistorialPacientes/Create
         public ActionResult Create(int? turno)
         {
+            if (turno == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Turnos Turnos = db.Turnos.Find(turno);
+            if (Turnos == null)
+            {
+                return HttpNotFound();
+            }
             
+            ViewBag.Paciente = Turnos.Pacientes;
+            ViewBag.Turno = Turnos;
             ViewBag.idPaciente = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto", Turnos.idPaciente);
             ViewBag.idTurno = new SelectList(db.Turnos, "idTurno", "Observaciones", turno);            
+
             return View();
         }
 
@@ -80,6 +91,9 @@ namespace MedicinaRegenerativa.Controllers
             {
                 return HttpNotFound();
             }
+            Turnos Turnos = db.Turnos.Find(historialPacientes.idTurno);
+            ViewBag.Paciente = historialPacientes.Pacientes;
+            ViewBag.Turno = Turnos;
             ViewBag.idPaciente = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto", historialPacientes.idPaciente);
             ViewBag.idTurno = new SelectList(db.Turnos, "idTurno", "Fecha", historialPacientes.idTurno);
             return View(historialPacientes);
