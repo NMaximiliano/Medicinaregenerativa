@@ -43,6 +43,11 @@
     <Property Name="mail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="idObraSocial" Type="Int32" />
     <NavigationProperty Name="ObrasSociales" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Pacientes_dbo_ObrasSociales" FromRole="Pacientes" ToRole="ObrasSociales" />
+    <Property Name="cuit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="TipoTurnos">
     <Key>

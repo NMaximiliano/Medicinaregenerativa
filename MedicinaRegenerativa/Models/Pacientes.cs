@@ -30,6 +30,7 @@ namespace MedicinaRegenerativa.Models
         public string Telefono { get; set; }
         [Display(Name = "Fecha de Nacimiento")]
         //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
         [Display(Name = "Fecha de Carga")]
@@ -38,6 +39,16 @@ namespace MedicinaRegenerativa.Models
         [Display(Name = "Email")]        
         [EmailAddress(ErrorMessage = "El formato del Mail es incorrecta")]
         public string mail { get; set; }
+        [Display(Name = "Cuit/Cuil")]
+        public string cuit { get; set; }
+        [Display(Name = "Pais")]
+        public string pais { get; set; }
+        [Display(Name = "Ciudad")]
+        public string ciudad { get; set; }
+        [Display(Name = "Provincia")]
+        public string provincia { get; set; }
+        [Display(Name = "Observaciones")]
+        public string observaciones { get; set; }
         public Nullable<int> idObraSocial { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

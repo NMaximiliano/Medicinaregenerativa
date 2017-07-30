@@ -46,6 +46,11 @@
     <Property Name="UserId" Type="nvarchar" MaxLength="128" />
     <Property Name="mail" Type="varchar" MaxLength="100" />
     <Property Name="idObraSocial" Type="int" />
+    <Property Name="cuit" Type="varchar" MaxLength="20" />
+    <Property Name="pais" Type="varchar" MaxLength="50" />
+    <Property Name="ciudad" Type="varchar" MaxLength="50" />
+    <Property Name="provincia" Type="varchar" MaxLength="50" />
+    <Property Name="observaciones" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="TipoTurnos">
     <Key>

@@ -29,6 +29,11 @@
     <EntitySetMapping Name="Pacientes">
       <EntityTypeMapping TypeName="DB_A06236_turnosMedicModel.Pacientes">
         <MappingFragment StoreEntitySet="Pacientes">
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="provincia" ColumnName="provincia" />
+          <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+          <ScalarProperty Name="pais" ColumnName="pais" />
+          <ScalarProperty Name="cuit" ColumnName="cuit" />
           <ScalarProperty Name="idObraSocial" ColumnName="idObraSocial" />
           <ScalarProperty Name="mail" ColumnName="mail" />
           <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />

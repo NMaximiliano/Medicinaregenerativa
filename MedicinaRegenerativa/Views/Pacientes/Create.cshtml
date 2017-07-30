@@ -1,16 +1,19 @@
 ﻿@model MedicinaRegenerativa.Models.Pacientes
-
+@using MedicinaRegenerativa.Infraestructura
 @{
     ViewBag.Title = "Crear Paciente";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Crear Paciente</h2>
-@*<script src="~/Scripts/jquery-ui.js"></script>
-<link href="~/Content/jquery/jquery-ui.css" rel="stylesheet">*@
+<script src="~/Scripts/jquery-ui.js"></script>
+<link href="~/Content/jquery/jquery-ui.css" rel="stylesheet">
+<script src="@Url.Content("~/Scripts/autocomplete.js")" type="text/javascript"></script>
+@Styles.Render("~/Content/cssSelect2")
 @section Scripts {
     @Scripts.Render("~/bundles/bootstrapDateTimePicker")
 @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/select2")
 }
 @Styles.Render("~/Content/cssFechas")
 
@@ -61,43 +64,62 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.idObraSocial, "idObraSocial", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.cuit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cuit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cuit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ciudad, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                
+                @Html.AutocompleteFor(model => model.ciudad, "ObtenerCiudades", "Pacientes")
+                @Html.ValidationMessageFor(model => model.ciudad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.pais, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.AutocompleteFor(model => model.pais, "ObtenerPaises", "Pacientes")
+                @Html.ValidationMessageFor(model => model.pais, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.provincia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.AutocompleteFor(model => model.provincia, "ObtenerProvincias", "Pacientes")
+                @Html.ValidationMessageFor(model => model.provincia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.observaciones, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">                
+                @Html.TextAreaFor(model => model.observaciones, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.observaciones, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.idObraSocial, "Obra Social", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idObraSocial", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.idObraSocial, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*<div class='input-group date' id='datetimepicker1'>*@
-                    @*@Html.TextBoxFor(model => model.FechaNacimiento, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @class = "form-control" /*disabled = "disabled", @readonly = "readonly" */})*@
-                    @*<span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>*@
-                @*</div>*@
-                @Html.EditorFor(model => model.FechaNacimiento, "", new { htmlAttributes = new { @class = "form-control" } })                                
-                
-                @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         @*<div class="form-group">
-            @Html.LabelFor(model => model.FechaCarga, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.pais, "pais", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaCarga, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FechaCarga, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                @Html.DropDownList("pais", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idObraSocial, "", new { @class = "text-danger" })
             </div>
         </div>*@
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">                
+                @Html.EditorFor(model => model.FechaNacimiento, "", new { htmlAttributes = new { @class = "form-control" } })                                                
+                @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "text-danger" })
+            </div>
+        </div>       
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Crear" class="btn btn-default" />
@@ -123,9 +145,57 @@
     $(function () {
         $('#FechaNacimiento').datetimepicker({
             format: "YYYY/MM/DD",
+            /*format: "DD/MM/YYYY",*/
             /*extraFormats: ['DD/MM/YY'],*/ viewMode: 'years'
-        });
-       // $('#datetimepicker1').data("DateTimePicker").show();
+        });       
     });
+    $(document).ready(function () {        
+        $("#idObraSocial").select2();
+        $("#pais").select2();
+       /* $("#ciudad").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Pacientes/ObtenerCiudade",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        if (data.success) {
+                            alert(data.Pacientes[0].ciudad)
+                            response($.map(data.Pacientes, function (item) {
+                                return { label: item.ciudad, value: item.ciudad };
+                            }))
+                        }
+
+                    },
+                    error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    alert(msg);
+                },
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+        */
+        
+    });
+    
 </script>
 

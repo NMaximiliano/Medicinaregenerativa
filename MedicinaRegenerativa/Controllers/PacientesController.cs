@@ -12,14 +12,15 @@ using System.Data.Entity.Validation;
 
 namespace MedicinaRegenerativa.Controllers
 {
-    public class PacientesController : Controller
+    
+public class PacientesController : Controller
     {
         private DB_A06236_turnosMedicEntities db = new DB_A06236_turnosMedicEntities();
 
         // GET: Pacientes
         public ActionResult Index()
         {
-//            HttpContext.Session["culture"] = "es-ES";
+            //            HttpContext.Session["culture"] = "es-ES";
 
             return View(db.Pacientes.ToList());
         }
@@ -43,7 +44,8 @@ namespace MedicinaRegenerativa.Controllers
         public ActionResult Create()
         {
             
-            ViewBag.idObraSocial = new SelectList(db.ObrasSociales, "idObraSocial", "Descripcion");
+            
+            ViewBag.idObraSocial = new SelectList(db.ObrasSociales, "idObraSocial", "Descripcion");            
             HttpContext.Session["culture"] = "es-ES";
             return View();
         }
@@ -53,14 +55,14 @@ namespace MedicinaRegenerativa.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idPaciente, NombreCompleto,Documento,Direccion,Telefono,FechaNacimiento, mail, idObraSocial")] Pacientes pacientes)
+        public ActionResult Create([Bind(Include = "idPaciente, NombreCompleto,Documento,Direccion,Telefono,FechaNacimiento, mail, idObraSocial, cuit, ciudad, pais, provincia, observaciones")] Pacientes pacientes)
         {
             if (ModelState.IsValid)
             {
                 pacientes.UserId = User.Identity.GetUserId();
                 pacientes.FechaCarga = DateTime.Now;
                 db.Pacientes.Add(pacientes);
-                
+
                 try
                 {
                     db.SaveChanges();
@@ -130,7 +132,7 @@ namespace MedicinaRegenerativa.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idPaciente,NombreCompleto,Documento,Direccion,Telefono,FechaNacimiento,FechaCarga,UserId, mail, idObraSocial")] Pacientes pacientes)
+        public ActionResult Edit([Bind(Include = "idPaciente,NombreCompleto,Documento,Direccion,Telefono,FechaNacimiento,FechaCarga,UserId, mail, idObraSocial, cuit, ciudad, pais, provincia, observaciones")] Pacientes pacientes)
         {
             if (ModelState.IsValid)
             {
@@ -178,5 +180,40 @@ namespace MedicinaRegenerativa.Controllers
             }
             base.Dispose(disposing);
         }
+        
+        public ActionResult ObtenerCiudades(string term)
+        {
+            var ListadoPacientes = db.Pacientes.Where(x => x.ciudad.Contains(term)).Select(c => new { ciudad = c.ciudad }).AsEnumerable();
+            return Json(ListadoPacientes.Select(x => x.ciudad).Distinct(), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ObtenerPaises(string term)
+        {
+            var ListadoPacientes = db.Pacientes.Where(x => x.pais.Contains(term)).Select(c => new { pais = c.pais }).AsEnumerable();
+            return Json(ListadoPacientes.Select(x => x.pais).Distinct(), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ObtenerProvincias(string term)
+        {
+            var ListadoPacientes = db.Pacientes.Where(x => x.provincia.Contains(term)).Select(c => new { provincia = c.provincia }).AsEnumerable();
+            return Json(ListadoPacientes.Select(x => x.provincia).Distinct(), JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult  ObtenerCiudade(string Prefix)
+        {
+            //Note : you can bind same list from database  
+            var ListadoPacientes = db.Pacientes.Where(x => x.ciudad.Contains(Prefix)).Select(c => new { ciudad = c.ciudad }).ToList();
+        //    return Json(ListadoPacientes, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, Pacientes = ListadoPacientes }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Autocomplete(string term)
+        {
+            //var items = new[] { "Apple", "Pear", "Banana", "Pineapple", "Peach" };
+
+            //var filteredItems = items.Where(
+            //    item => item.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0
+            //    );
+            var ListadoPacientes = db.Pacientes.Where(x => x.ciudad.Contains(term)).Select(c => new { ciudad = c.ciudad }).AsEnumerable();            
+            return Json(ListadoPacientes.Select(x => x.ciudad).Distinct(), JsonRequestBehavior.AllowGet);
+        }
     }
+    
 }
