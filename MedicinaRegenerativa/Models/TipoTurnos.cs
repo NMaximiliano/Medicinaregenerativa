@@ -11,8 +11,7 @@ namespace MedicinaRegenerativa.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class TipoTurnos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,9 +22,7 @@ namespace MedicinaRegenerativa.Models
     
         public int idTipoTurno { get; set; }
         public string Descripcion { get; set; }
-        [Display(Name = "Fecha de Carga")]
         public Nullable<System.DateTime> FechaCarga { get; set; }
-        [Display(Name = "Usuario")]
         public string UserId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

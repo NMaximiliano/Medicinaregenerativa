@@ -11,21 +11,15 @@ namespace MedicinaRegenerativa.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class HistorialPacientes
     {
         public int idHistorialPaciente { get; set; }
         public string Historia { get; set; }
-        [Display(Name = "Medicación Recibida")]
         public string MedicacionRecibida { get; set; }
-        [Display(Name = "Paciente")]
         public int idPaciente { get; set; }
-        [Display(Name = "Turno")]
         public int idTurno { get; set; }
-        [Display(Name = "Fecha de Carga")]
         public Nullable<System.DateTime> FechaCarga { get; set; }
-        [Display(Name = "Usuario")]
         public string UserId { get; set; }
     
         public virtual Pacientes Pacientes { get; set; }

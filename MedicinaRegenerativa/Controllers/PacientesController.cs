@@ -22,7 +22,7 @@ public class PacientesController : Controller
         {
             //            HttpContext.Session["culture"] = "es-ES";
 
-            return View(db.Pacientes.ToList());
+            return View(db.Pacientes.OrderBy(x => x.NombreCompleto).ToList());
         }
 
         // GET: Pacientes/Details/5
@@ -55,7 +55,7 @@ public class PacientesController : Controller
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idPaciente, NombreCompleto,Documento,Direccion,Telefono,FechaNacimiento, mail, idObraSocial, cuit, ciudad, pais, provincia, observaciones")] Pacientes pacientes)
+        public ActionResult Create([Bind(Include = "idPaciente, NombreCompleto,Documento,Direccion,Telefono,FechaNacimiento, mail, idObraSocial, cuit, ciudad, pais, provincia, observaciones, nroSocioObraSocial")] Pacientes pacientes)
         {
             if (ModelState.IsValid)
             {
@@ -132,7 +132,7 @@ public class PacientesController : Controller
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idPaciente,NombreCompleto,Documento,Direccion,Telefono,FechaNacimiento,FechaCarga,UserId, mail, idObraSocial, cuit, ciudad, pais, provincia, observaciones")] Pacientes pacientes)
+        public ActionResult Edit([Bind(Include = "idPaciente,NombreCompleto,Documento,Direccion,Telefono,FechaNacimiento,FechaCarga,UserId, mail, idObraSocial, cuit, ciudad, pais, provincia, observaciones, nroSocioObraSocial")] Pacientes pacientes)
         {
             if (ModelState.IsValid)
             {
