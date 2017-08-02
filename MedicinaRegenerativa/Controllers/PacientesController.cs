@@ -12,17 +12,17 @@ using System.Data.Entity.Validation;
 
 namespace MedicinaRegenerativa.Controllers
 {
-    
-public class PacientesController : Controller
+
+    public class PacientesController : Controller
     {
         private DB_A06236_turnosMedicEntities db = new DB_A06236_turnosMedicEntities();
 
         // GET: Pacientes
         public ActionResult Index()
         {
-            //            HttpContext.Session["culture"] = "es-ES";
-
-            return View(db.Pacientes.OrderBy(x => x.NombreCompleto).ToList());
+            //            HttpContext.Session["culture"] = "es-ES";            
+            ViewBag.PacientesNombres = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto"); ;
+            return View(db.Pacientes.OrderBy(x => x.NombreCompleto).ToList());            
         }
 
         // GET: Pacientes/Details/5
@@ -43,9 +43,9 @@ public class PacientesController : Controller
         // GET: Pacientes/Create
         public ActionResult Create()
         {
-            
-            
-            ViewBag.idObraSocial = new SelectList(db.ObrasSociales, "idObraSocial", "Descripcion");            
+
+
+            ViewBag.idObraSocial = new SelectList(db.ObrasSociales, "idObraSocial", "Descripcion");
             HttpContext.Session["culture"] = "es-ES";
             return View();
         }
@@ -180,7 +180,7 @@ public class PacientesController : Controller
             }
             base.Dispose(disposing);
         }
-        
+
         public ActionResult ObtenerCiudades(string term)
         {
             var ListadoPacientes = db.Pacientes.Where(x => x.ciudad.Contains(term)).Select(c => new { ciudad = c.ciudad }).AsEnumerable();
@@ -197,11 +197,11 @@ public class PacientesController : Controller
             return Json(ListadoPacientes.Select(x => x.provincia).Distinct(), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult  ObtenerCiudade(string Prefix)
+        public JsonResult ObtenerCiudade(string Prefix)
         {
             //Note : you can bind same list from database  
             var ListadoPacientes = db.Pacientes.Where(x => x.ciudad.Contains(Prefix)).Select(c => new { ciudad = c.ciudad }).ToList();
-        //    return Json(ListadoPacientes, JsonRequestBehavior.AllowGet);
+            //    return Json(ListadoPacientes, JsonRequestBehavior.AllowGet);
             return Json(new { success = true, Pacientes = ListadoPacientes }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Autocomplete(string term)
@@ -211,9 +211,15 @@ public class PacientesController : Controller
             //var filteredItems = items.Where(
             //    item => item.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0
             //    );
-            var ListadoPacientes = db.Pacientes.Where(x => x.ciudad.Contains(term)).Select(c => new { ciudad = c.ciudad }).AsEnumerable();            
+            var ListadoPacientes = db.Pacientes.Where(x => x.ciudad.Contains(term)).Select(c => new { ciudad = c.ciudad }).AsEnumerable();
             return Json(ListadoPacientes.Select(x => x.ciudad).Distinct(), JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public PartialViewResult ObtenerPacientes(int PacientesNombres)
+        {
+            var pacientes = db.Pacientes.Where(x => x.idPaciente == PacientesNombres);
+            return PartialView("_ListadoPacientes", pacientes);
+        }
     }
-    
+
 }
