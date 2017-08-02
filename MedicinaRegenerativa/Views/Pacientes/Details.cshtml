@@ -1,6 +1,9 @@
 ﻿@model MedicinaRegenerativa.Models.Pacientes
 
 @{
+    
+    var HistorialPaciente = Model.HistorialPacientes.ToList();
+    IEnumerable<MedicinaRegenerativa.Models.HistorialPacientes> historial = HistorialPaciente;
     ViewBag.Title = "Detalle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -116,7 +119,59 @@
 
     </dl>
 </div>
+<hr />
+<h3>historial del Paciente</h3>
+
+<p>
+    @*@Html.ActionLink("Crear Nuevo", "Create")*@
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Historia
+        </th>
+        <th>
+            Medicación Recibida
+        </th>                
+        <th>
+            Fecha del Turno
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in historial)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Historia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MedicacionRecibida)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.FechaCarga)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Pacientes.NombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Turnos.Fecha)
+            </td>
+            <td>                
+                @Html.ActionLink("Editar", "Edit", "HistorialPacientes", new { id = item.idHistorialPaciente }, new { turno = item.idPaciente }) |
+                @Html.ActionLink("Detalle", "Details", "HistorialPacientes", new { id = item.idHistorialPaciente }, new { turno = item.idPaciente }) |
+                @Html.ActionLink("Borrar", "Delete", "HistorialPacientes", new { id = item.idHistorialPaciente }, new { turno = item.idPaciente })
+            </td>
+        </tr>
+    }
+
+</table>
+
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.idPaciente }) |
     @Html.ActionLink("Volver al Listado", "Index")
 </p>
+

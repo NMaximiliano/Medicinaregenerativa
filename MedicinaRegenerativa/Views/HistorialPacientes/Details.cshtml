@@ -63,5 +63,5 @@
 </div>
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.idHistorialPaciente }) |
-    @Html.ActionLink("Volver al Listado", "Index")
+    @Html.ActionLink("Volver", "Details", "Pacientes", new { id = Model.idPaciente }, new { turno = Model.idHistorialPaciente }) |    
 </p>
