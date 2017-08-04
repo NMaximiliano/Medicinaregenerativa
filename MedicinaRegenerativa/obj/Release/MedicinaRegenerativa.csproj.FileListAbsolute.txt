@@ -138,4 +138,3 @@ C:\Users\Maximiliano\Source\Repos\Medicinaregenerativa\MedicinaRegenerativa\bin\
 C:\Users\Maximiliano\Source\Repos\Medicinaregenerativa\MedicinaRegenerativa\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
 C:\Users\Maximiliano\Source\Repos\Medicinaregenerativa\MedicinaRegenerativa\obj\Release\MedicinaRegenerativa.dll
 C:\Users\Maximiliano\Source\Repos\Medicinaregenerativa\MedicinaRegenerativa\obj\Release\MedicinaRegenerativa.pdb
-C:\Users\Maximiliano\Source\Repos\Medicinaregenerativa\MedicinaRegenerativa\obj\Release\MedicinaRegenerativa.csprojResolveAssemblyReference.cache

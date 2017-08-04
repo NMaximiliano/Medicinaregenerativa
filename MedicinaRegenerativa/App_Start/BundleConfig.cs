@@ -24,9 +24,7 @@ namespace MedicinaRegenerativa
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                    /*  "~/Scripts/moment.js",
-                      "~/Scripts/bootstrap-datetimepicker.min.js",*/
+                      "~/Scripts/bootstrap.js",               
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapDateTimePicker").Include(                      
@@ -35,17 +33,15 @@ namespace MedicinaRegenerativa
                         "~/Scripts/bootstrap-datetimepicker.min.js"
                       ));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                     /* "~/Content/bootstrap-datetimepicker.css",
-                      "~/Content/bootstrap-datetimepicker.min.css",*/
+            bundles.Add(new StyleBundle("~/Content/appcss").Include(
+                      "~/Content/bootstrap.css",                  
                       "~/Content/site.css"
                       ));
             bundles.Add(new StyleBundle("~/Content/cssFechas").Include(                      
                        "~/Content/bootstrap-datetimepicker.css",
                        "~/Content/bootstrap-datetimepicker.min.css"
                       ));
-            bundles.Add(new StyleBundle("~/Content/cssSelect2").Include(
+            bundles.Add(new StyleBundle("~/Content/css2Select").Include(
                        "~/Content/css/select2.css"
                       ));
         }
