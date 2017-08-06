@@ -24,5 +24,6 @@ namespace MedicinaRegenerativa.Models
     
         public virtual Pacientes Pacientes { get; set; }
         public virtual Turnos Turnos { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

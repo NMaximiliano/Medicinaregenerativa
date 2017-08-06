@@ -31,5 +31,15 @@ namespace MedicinaRegenerativa.Models
         public virtual DbSet<TipoTurnos> TipoTurnos { get; set; }
         public virtual DbSet<Turnos> Turnos { get; set; }
         public virtual DbSet<ObrasSociales> ObrasSociales { get; set; }
+        public virtual DbSet<EstadosPresupuestos> EstadosPresupuestos { get; set; }
+        public virtual DbSet<MediosPago> MediosPago { get; set; }
+        public virtual DbSet<Presupuestos> Presupuestos { get; set; }
+        public virtual DbSet<PresupuestosIngresos> PresupuestosIngresos { get; set; }
+        public virtual DbSet<TiposMoneda> TiposMoneda { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     }
 }

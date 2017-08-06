@@ -71,7 +71,7 @@ namespace MedicinaRegenerativa.Controllers
                 historialPacientes.FechaCarga = DateTime.Now;
                 db.HistorialPacientes.Add(historialPacientes);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Turnos");
             }
 
             ViewBag.idPaciente = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto", historialPacientes.idPaciente);
@@ -112,7 +112,7 @@ namespace MedicinaRegenerativa.Controllers
                 historialPacientes.FechaCarga = DateTime.Now;
                 db.Entry(historialPacientes).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Pacientes");
             }
             ViewBag.idPaciente = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto", historialPacientes.idPaciente);
             ViewBag.idTurno = new SelectList(db.Turnos, "idTurno", "Fecha", historialPacientes.idTurno);

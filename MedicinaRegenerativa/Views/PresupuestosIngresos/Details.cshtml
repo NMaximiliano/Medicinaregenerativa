@@ -1,0 +1,91 @@
+﻿@model MedicinaRegenerativa.Models.PresupuestosIngresos
+
+@{
+    ViewBag.Title = "Detalle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalle</h2>
+
+<div>
+    <h4>Ingresos de Presupuestos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuota)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cuota)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaNro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaNro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCarga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCarga)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MediosPago.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MediosPago.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Presupuestos.Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Presupuestos.Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TiposMoneda.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TiposMoneda.Descripcion)
+        </dd>
+
+        <dt>
+            Usuario que dio el alta
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idPresupuestoIngreso }) |
+    @Html.ActionLink("Volver", "Details", "Presupuestos", new { id = Model.idPresupuestos },new  { @class = "btn btn-primary" })
+</p>

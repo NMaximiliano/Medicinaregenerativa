@@ -13,39 +13,33 @@ namespace MedicinaRegenerativa.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Turnos
+    public partial class Presupuestos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Turnos()
+        public Presupuestos()
         {
-            this.Calendario = new HashSet<Calendario>();
-            this.HistorialPacientes = new HashSet<HistorialPacientes>();
+            this.PresupuestosIngresos = new HashSet<PresupuestosIngresos>();
         }
     
-        public int idTurno { get; set; }
-        [Display(Name = "Fecha")]
-        //[DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public Nullable<System.DateTime> Fecha { get; set; }
-        public string Hora { get; set; }
-        [Display(Name = "Tiempo Reservado")]
-        public Nullable<byte> TiempoReservado { get; set; }
+        public int idPresupuestos { get; set; }
+        [DataType(DataType.Currency)]
+        //[DisplayFormat(DataFormatString = "{0:c}")]
+        
+        public Nullable<decimal> Precio { get; set; }
+        public Nullable<byte> Cuotas { get; set; }
         public string Observaciones { get; set; }
-        [Display(Name = "Paciente")]
         public int idPaciente { get; set; }
-        [Display(Name = "Tipo Turno")]
         public int idTipoTurno { get; set; }
+        public byte idEstadoPresupuesto { get; set; }
         [Display(Name = "Fecha de Carga")]
         public Nullable<System.DateTime> FechaCarga { get; set; }
-        [Display(Name = "Usuario")]
         public string UserId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Calendario> Calendario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HistorialPacientes> HistorialPacientes { get; set; }
+        public virtual EstadosPresupuestos EstadosPresupuestos { get; set; }
         public virtual Pacientes Pacientes { get; set; }
         public virtual TipoTurnos TipoTurnos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PresupuestosIngresos> PresupuestosIngresos { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

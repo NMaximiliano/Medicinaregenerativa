@@ -17,6 +17,32 @@
         <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_Turnos_dbo_TipoTurnos" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DB_A06236_turnosMedicModel.ObrasSociales" Width="1.5" PointX="0.75" PointY="1" />
         <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_Pacientes_dbo_ObrasSociales" />
+        <EntityTypeShape EntityType="DB_A06236_turnosMedicModel.EstadosPresupuestos" Width="1.5" PointX="6.75" PointY="1.5" />
+        <EntityTypeShape EntityType="DB_A06236_turnosMedicModel.MediosPago" Width="1.5" PointX="9" PointY="8.25" />
+        <EntityTypeShape EntityType="DB_A06236_turnosMedicModel.Presupuestos" Width="1.5" PointX="9" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_A06236_turnosMedicModel.PresupuestosIngresos" Width="1.5" PointX="11.25" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_A06236_turnosMedicModel.TiposMoneda" Width="1.5" PointX="9" PointY="11" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_EstadosPresupuestos" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_MediosPago" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_Pacientes" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_TipoTurnos" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_Presupuestos" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_TiposMoneda" />
+        <EntityTypeShape EntityType="DB_A06236_turnosMedicModel.C__MigrationHistory" Width="1.5" PointX="5.625" PointY="8.75" />
+        <EntityTypeShape EntityType="DB_A06236_turnosMedicModel.AspNetRoles" Width="1.5" PointX="1.5" PointY="11.25" />
+        <EntityTypeShape EntityType="DB_A06236_turnosMedicModel.AspNetUserClaims" Width="1.5" PointX="3" PointY="13.75" />
+        <EntityTypeShape EntityType="DB_A06236_turnosMedicModel.AspNetUserLogins" Width="1.5" PointX="3" PointY="16.5" />
+        <EntityTypeShape EntityType="DB_A06236_turnosMedicModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="2.375" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_Calendario_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_HistorialPacientes_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_ObrasSociales_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_Pacientes_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_Turnos_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,6 +18,7 @@ namespace MedicinaRegenerativa.Models
         public TipoTurnos()
         {
             this.Turnos = new HashSet<Turnos>();
+            this.Presupuestos = new HashSet<Presupuestos>();
         }
     
         public int idTipoTurno { get; set; }
@@ -27,5 +28,7 @@ namespace MedicinaRegenerativa.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Turnos> Turnos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Presupuestos> Presupuestos { get; set; }
     }
 }

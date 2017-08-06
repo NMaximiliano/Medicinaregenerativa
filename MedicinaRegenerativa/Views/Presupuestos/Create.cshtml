@@ -1,13 +1,14 @@
-﻿@model MedicinaRegenerativa.Models.Turnos
+﻿@model MedicinaRegenerativa.Models.Presupuestos
 
 @{
-    ViewBag.Title = "Turnos";
+    ViewBag.Title = "Crear Presupuesto";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Crear</h2>
 <script src="~/Scripts/jquery-ui.js"></script>
 <link href="~/Content/jquery/jquery-ui.css" rel="stylesheet">
+<script src="@Url.Content("~/Scripts/autocomplete.js")" type="text/javascript"></script>
 @Styles.Render("~/Content/css2Select")
 @section Scripts {
     @Scripts.Render("~/bundles/bootstrapDateTimePicker")
@@ -24,38 +25,30 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Turnos</h4>
+        <h4>Presupuestos</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Precio, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Fecha,  new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Hora, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Cuotas, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Hora, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Hora, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TiempoReservado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TiempoReservado, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TiempoReservado, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Cuotas, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cuotas, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.TextAreaFor(model => model.Observaciones, new { @class = "form-control" })
+                @*@Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -76,6 +69,14 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.idEstadoPresupuesto, "EstadoPresupuesto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idEstadoPresupuesto", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idEstadoPresupuesto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         @*<div class="form-group">
             @Html.LabelFor(model => model.FechaCarga, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -85,9 +86,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
             </div>
         </div>*@
@@ -101,37 +102,15 @@
 }
 
 <div>
-    @Html.ActionLink("Volver al Listado", "Index")
+    @Html.ActionLink("Volver al Listado de Presupuestos", "Index")
 </div>
 
 <script type="text/javascript">
-    /*$(function () {
-        $("#FechaNacimiento").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            showButtonPanel: true,
-            format: "dd/mm/yyyy",
-            language: "es",
-        });
-    });*/
-    $(function () {
-        $('#Fecha').datetimepicker({
-            format: "YYYY/MM/DD",
-            /*extraFormats: ['DD/MM/YY'],*/ viewMode: 'years'
-        });
-       // $('#datetimepicker1').data("DateTimePicker").show();
-    });
-    $(function () {
-        $('#Hora').datetimepicker({
-            format: 'HH:mm'
-       /*     pickDate: false,
-            pickSeconds: false,
-            pick12HourFormat: false*/
-        });
-    });
     $(document).ready(function () {
         $("#idPaciente").select2();
         $("#idTipoTurno").select2();
-        
+        $("#idEstadoPresupuesto").select2();
+       
     });
+
 </script>

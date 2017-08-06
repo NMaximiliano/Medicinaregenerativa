@@ -20,8 +20,9 @@ namespace MedicinaRegenerativa.Models
         {
             this.HistorialPacientes = new HashSet<HistorialPacientes>();
             this.Turnos = new HashSet<Turnos>();
+            this.Presupuestos = new HashSet<Presupuestos>();
         }
-
+    
         public int idPaciente { get; set; }
         [Display(Name = "Nombre Completo")]
         public string NombreCompleto { get; set; }
@@ -38,7 +39,7 @@ namespace MedicinaRegenerativa.Models
         public string UserId { get; set; }
         [Display(Name = "Email")]
         [EmailAddress(ErrorMessage = "El formato del Mail es incorrecta")]
-        public string mail { get; set; }
+        public string mail { get; set; }        
         [Display(Name = "Cuit/Cuil")]
         public string cuit { get; set; }
         [Display(Name = "Pais")]
@@ -58,5 +59,8 @@ namespace MedicinaRegenerativa.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Turnos> Turnos { get; set; }
         public virtual ObrasSociales ObrasSociales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Presupuestos> Presupuestos { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

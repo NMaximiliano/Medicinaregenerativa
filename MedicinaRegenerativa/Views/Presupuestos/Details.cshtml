@@ -1,0 +1,133 @@
+﻿@model MedicinaRegenerativa.Models.Presupuestos
+
+@{
+    Model.PresupuestosIngresos.ToList();
+    IEnumerable<MedicinaRegenerativa.Models.PresupuestosIngresos> presupuestosIngresos = Model.PresupuestosIngresos.ToList(); 
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalle</h2>
+
+<div>
+    <h4>Presupuestos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuotas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cuotas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCarga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCarga)
+        </dd>
+
+        <dt>
+            Estado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadosPresupuestos.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pacientes.NombreCompleto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pacientes.NombreCompleto)
+        </dd>
+
+        <dt>
+            Tratamiento
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoTurnos.Descripcion)
+        </dd>
+
+        <dt>
+            Usuario que dio el Alta
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idPresupuestos }) |
+    @Html.ActionLink("Volver al listado", "Index")
+</p>
+@Html.ActionLink("Crear Nuevo Ingreso", "Create", "PresupuestosIngresos", new { presupuesto = Model.idPresupuestos}, new { @class = "btn btn-primary btn-large" })
+<hr />
+<table class="table" id="ListadoPresupuestosIngresos">
+    <tr>
+        <th>
+            Medio de Pago
+        </th>
+        <th>
+            Moneda
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>*@
+        <th>
+            Monto
+        </th>
+        <th>
+            Observaciones
+        </th>
+        
+        <th>Acciones</th>
+    </tr>
+
+    @foreach (var item in presupuestosIngresos)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MediosPago.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TiposMoneda.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observaciones)
+            </td>           
+            <td>
+                @Html.ActionLink("Editar", "Edit", "PresupuestosIngresos", new { id = item.idPresupuestoIngreso }, new { turno = item.idPresupuestoIngreso }) |
+                @Html.ActionLink("Detalle", "Details", "PresupuestosIngresos", new { id = item.idPresupuestoIngreso }, new { turno = item.idPresupuestoIngreso }) |
+                @Html.ActionLink("Borrar", "Delete", "PresupuestosIngresos", new { id = item.idPresupuestoIngreso }, new { turno = item.idPresupuestoIngreso }) 
+            </td>
+        </tr>
+    }
+
+</table>
+

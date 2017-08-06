@@ -12,16 +12,22 @@ namespace MedicinaRegenerativa.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Calendario
+    public partial class PresupuestosIngresos
     {
-        public int idCalendario { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
-        public string Hora { get; set; }
-        public int idTurno { get; set; }
+        public int idPresupuestoIngreso { get; set; }
+        public Nullable<decimal> Monto { get; set; }
+        public Nullable<byte> Cuota { get; set; }
+        public string Observaciones { get; set; }
+        public int idPresupuestos { get; set; }
+        public byte idTipoMoneda { get; set; }
+        public Nullable<byte> idMedioPago { get; set; }
+        public string FacturaNro { get; set; }
         public Nullable<System.DateTime> FechaCarga { get; set; }
         public string UserId { get; set; }
     
-        public virtual Turnos Turnos { get; set; }
+        public virtual MediosPago MediosPago { get; set; }
+        public virtual Presupuestos Presupuestos { get; set; }
+        public virtual TiposMoneda TiposMoneda { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

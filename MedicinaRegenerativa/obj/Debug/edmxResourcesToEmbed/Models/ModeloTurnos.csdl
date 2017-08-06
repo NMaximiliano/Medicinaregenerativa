@@ -11,6 +11,7 @@
     <Property Name="FechaCarga" Type="DateTime" Precision="3" />
     <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Turnos" Relationship="Self.FK_dbo_Turnos_dbo_Turnos" FromRole="Calendario" ToRole="Turnos" />
+    <NavigationProperty Name="AspNetUsers" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Calendario_dbo_AspNetUsers_UserId" FromRole="Calendario" ToRole="AspNetUsers" />
   </EntityType>
   <EntityType Name="HistorialPacientes">
     <Key>
@@ -25,6 +26,7 @@
     <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Pacientes" Relationship="Self.FK_dbo_HistorialPacientes_dbo_Pacientes" FromRole="HistorialPacientes" ToRole="Pacientes" />
     <NavigationProperty Name="Turnos" Relationship="Self.FK_dbo_HistorialPacientes_dbo_Turnos" FromRole="HistorialPacientes" ToRole="Turnos" />
+    <NavigationProperty Name="AspNetUsers" Relationship="DB_A06236_turnosMedicModel.FK_dbo_HistorialPacientes_dbo_AspNetUsers_UserId" FromRole="HistorialPacientes" ToRole="AspNetUsers" />
   </EntityType>
   <EntityType Name="Pacientes">
     <Key>
@@ -49,6 +51,8 @@
     <Property Name="provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="nroSocioObraSocial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Presupuestos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_Pacientes" FromRole="Pacientes" ToRole="Presupuestos" />
+    <NavigationProperty Name="AspNetUsers" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Pacientes_dbo_AspNetUsers_UserId" FromRole="Pacientes" ToRole="AspNetUsers" />
   </EntityType>
   <EntityType Name="TipoTurnos">
     <Key>
@@ -59,6 +63,7 @@
     <Property Name="FechaCarga" Type="DateTime" Precision="3" />
     <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Turnos" Relationship="Self.FK_dbo_Turnos_dbo_TipoTurnos" FromRole="TipoTurnos" ToRole="Turnos" />
+    <NavigationProperty Name="Presupuestos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_TipoTurnos" FromRole="TipoTurnos" ToRole="Presupuestos" />
   </EntityType>
   <EntityType Name="Turnos">
     <Key>
@@ -77,6 +82,7 @@
     <NavigationProperty Name="HistorialPacientes" Relationship="Self.FK_dbo_HistorialPacientes_dbo_Turnos" FromRole="Turnos" ToRole="HistorialPacientes" />
     <NavigationProperty Name="Pacientes" Relationship="Self.FK_dbo_Turnos_dbo_Pacientes" FromRole="Turnos" ToRole="Pacientes" />
     <NavigationProperty Name="TipoTurnos" Relationship="Self.FK_dbo_Turnos_dbo_TipoTurnos" FromRole="Turnos" ToRole="TipoTurnos" />
+    <NavigationProperty Name="AspNetUsers" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Turnos_dbo_AspNetUsers_UserId" FromRole="Turnos" ToRole="AspNetUsers" />
   </EntityType>
   <Association Name="FK_dbo_Turnos_dbo_Turnos">
     <End Role="Turnos" Type="Self.Turnos" Multiplicity="1" />
@@ -169,6 +175,80 @@
       <End Role="ObrasSociales" EntitySet="ObrasSociales" />
       <End Role="Pacientes" EntitySet="Pacientes" />
     </AssociationSet>
+    <EntitySet Name="EstadosPresupuestos" EntityType="DB_A06236_turnosMedicModel.EstadosPresupuestos" />
+    <EntitySet Name="MediosPago" EntityType="DB_A06236_turnosMedicModel.MediosPago" />
+    <EntitySet Name="Presupuestos" EntityType="DB_A06236_turnosMedicModel.Presupuestos" />
+    <EntitySet Name="PresupuestosIngresos" EntityType="DB_A06236_turnosMedicModel.PresupuestosIngresos" />
+    <EntitySet Name="TiposMoneda" EntityType="DB_A06236_turnosMedicModel.TiposMoneda" />
+    <AssociationSet Name="FK_dbo_Presupuestos_dbo_EstadosPresupuestos" Association="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_EstadosPresupuestos">
+      <End Role="EstadosPresupuestos" EntitySet="EstadosPresupuestos" />
+      <End Role="Presupuestos" EntitySet="Presupuestos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PresupuestosIngresos_dbo_MediosPago" Association="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_MediosPago">
+      <End Role="MediosPago" EntitySet="MediosPago" />
+      <End Role="PresupuestosIngresos" EntitySet="PresupuestosIngresos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Presupuestos_dbo_Pacientes" Association="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_Pacientes">
+      <End Role="Pacientes" EntitySet="Pacientes" />
+      <End Role="Presupuestos" EntitySet="Presupuestos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Presupuestos_dbo_TipoTurnos" Association="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_TipoTurnos">
+      <End Role="TipoTurnos" EntitySet="TipoTurnos" />
+      <End Role="Presupuestos" EntitySet="Presupuestos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PresupuestosIngresos_dbo_Presupuestos" Association="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_Presupuestos">
+      <End Role="Presupuestos" EntitySet="Presupuestos" />
+      <End Role="PresupuestosIngresos" EntitySet="PresupuestosIngresos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PresupuestosIngresos_dbo_TiposMoneda" Association="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_TiposMoneda">
+      <End Role="TiposMoneda" EntitySet="TiposMoneda" />
+      <End Role="PresupuestosIngresos" EntitySet="PresupuestosIngresos" />
+    </AssociationSet>
+    <EntitySet Name="C__MigrationHistory" EntityType="DB_A06236_turnosMedicModel.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="DB_A06236_turnosMedicModel.AspNetRoles" />
+    <EntitySet Name="AspNetUserClaims" EntityType="DB_A06236_turnosMedicModel.AspNetUserClaims" />
+    <EntitySet Name="AspNetUserLogins" EntityType="DB_A06236_turnosMedicModel.AspNetUserLogins" />
+    <EntitySet Name="AspNetUsers" EntityType="DB_A06236_turnosMedicModel.AspNetUsers" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="DB_A06236_turnosMedicModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="DB_A06236_turnosMedicModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Calendario_dbo_AspNetUsers_UserId" Association="DB_A06236_turnosMedicModel.FK_dbo_Calendario_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Calendario" EntitySet="Calendario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_HistorialPacientes_dbo_AspNetUsers_UserId" Association="DB_A06236_turnosMedicModel.FK_dbo_HistorialPacientes_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="HistorialPacientes" EntitySet="HistorialPacientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ObrasSociales_dbo_AspNetUsers_UserId" Association="DB_A06236_turnosMedicModel.FK_dbo_ObrasSociales_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="ObrasSociales" EntitySet="ObrasSociales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Pacientes_dbo_AspNetUsers_UserId" Association="DB_A06236_turnosMedicModel.FK_dbo_Pacientes_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Pacientes" EntitySet="Pacientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Presupuestos_dbo_AspNetUsers_UserId" Association="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Presupuestos" EntitySet="Presupuestos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PresupuestosIngresos_dbo_AspNetUsers_UserId" Association="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="PresupuestosIngresos" EntitySet="PresupuestosIngresos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Turnos_dbo_AspNetUsers_UserId" Association="DB_A06236_turnosMedicModel.FK_dbo_Turnos_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Turnos" EntitySet="Turnos" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="DB_A06236_turnosMedicModel.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ObrasSociales">
     <Key>
@@ -179,6 +259,7 @@
     <Property Name="FechaCarga" Type="DateTime" Precision="3" />
     <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Pacientes" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Pacientes_dbo_ObrasSociales" FromRole="ObrasSociales" ToRole="Pacientes" />
+    <NavigationProperty Name="AspNetUsers" Relationship="DB_A06236_turnosMedicModel.FK_dbo_ObrasSociales_dbo_AspNetUsers_UserId" FromRole="ObrasSociales" ToRole="AspNetUsers" />
   </EntityType>
   <Association Name="FK_dbo_Pacientes_dbo_ObrasSociales">
     <End Type="DB_A06236_turnosMedicModel.ObrasSociales" Role="ObrasSociales" Multiplicity="0..1" />
@@ -191,5 +272,331 @@
         <PropertyRef Name="idObraSocial" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EstadosPresupuestos">
+    <Key>
+      <PropertyRef Name="idEstadoPresupuesto" />
+    </Key>
+    <Property Name="idEstadoPresupuesto" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCarga" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Presupuestos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_EstadosPresupuestos" FromRole="EstadosPresupuestos" ToRole="Presupuestos" />
+  </EntityType>
+  <EntityType Name="MediosPago">
+    <Key>
+      <PropertyRef Name="idMedioPago" />
+    </Key>
+    <Property Name="idMedioPago" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCarga" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PresupuestosIngresos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_MediosPago" FromRole="MediosPago" ToRole="PresupuestosIngresos" />
+  </EntityType>
+  <EntityType Name="Presupuestos">
+    <Key>
+      <PropertyRef Name="idPresupuestos" />
+    </Key>
+    <Property Name="idPresupuestos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Cuotas" Type="Byte" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="idPaciente" Type="Int32" Nullable="false" />
+    <Property Name="idTipoTurno" Type="Int32" Nullable="false" />
+    <Property Name="idEstadoPresupuesto" Type="Byte" Nullable="false" />
+    <Property Name="FechaCarga" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="EstadosPresupuestos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_EstadosPresupuestos" FromRole="Presupuestos" ToRole="EstadosPresupuestos" />
+    <NavigationProperty Name="Pacientes" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_Pacientes" FromRole="Presupuestos" ToRole="Pacientes" />
+    <NavigationProperty Name="TipoTurnos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_TipoTurnos" FromRole="Presupuestos" ToRole="TipoTurnos" />
+    <NavigationProperty Name="PresupuestosIngresos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_Presupuestos" FromRole="Presupuestos" ToRole="PresupuestosIngresos" />
+    <NavigationProperty Name="AspNetUsers" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_AspNetUsers_UserId" FromRole="Presupuestos" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="PresupuestosIngresos">
+    <Key>
+      <PropertyRef Name="idPresupuestoIngreso" />
+    </Key>
+    <Property Name="idPresupuestoIngreso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Monto" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Cuota" Type="Byte" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="idPresupuestos" Type="Int32" Nullable="false" />
+    <Property Name="idTipoMoneda" Type="Byte" Nullable="false" />
+    <Property Name="idMedioPago" Type="Byte" />
+    <Property Name="FacturaNro" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCarga" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MediosPago" Relationship="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_MediosPago" FromRole="PresupuestosIngresos" ToRole="MediosPago" />
+    <NavigationProperty Name="Presupuestos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_Presupuestos" FromRole="PresupuestosIngresos" ToRole="Presupuestos" />
+    <NavigationProperty Name="TiposMoneda" Relationship="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_TiposMoneda" FromRole="PresupuestosIngresos" ToRole="TiposMoneda" />
+    <NavigationProperty Name="AspNetUsers" Relationship="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_AspNetUsers_UserId" FromRole="PresupuestosIngresos" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="TiposMoneda">
+    <Key>
+      <PropertyRef Name="idTipoMoneda" />
+    </Key>
+    <Property Name="idTipoMoneda" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCarga" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PresupuestosIngresos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_TiposMoneda" FromRole="TiposMoneda" ToRole="PresupuestosIngresos" />
+  </EntityType>
+  <Association Name="FK_dbo_Presupuestos_dbo_EstadosPresupuestos">
+    <End Type="DB_A06236_turnosMedicModel.EstadosPresupuestos" Role="EstadosPresupuestos" Multiplicity="1" />
+    <End Type="DB_A06236_turnosMedicModel.Presupuestos" Role="Presupuestos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadosPresupuestos">
+        <PropertyRef Name="idEstadoPresupuesto" />
+      </Principal>
+      <Dependent Role="Presupuestos">
+        <PropertyRef Name="idEstadoPresupuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PresupuestosIngresos_dbo_MediosPago">
+    <End Type="DB_A06236_turnosMedicModel.MediosPago" Role="MediosPago" Multiplicity="0..1" />
+    <End Type="DB_A06236_turnosMedicModel.PresupuestosIngresos" Role="PresupuestosIngresos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MediosPago">
+        <PropertyRef Name="idMedioPago" />
+      </Principal>
+      <Dependent Role="PresupuestosIngresos">
+        <PropertyRef Name="idMedioPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Presupuestos_dbo_Pacientes">
+    <End Type="DB_A06236_turnosMedicModel.Pacientes" Role="Pacientes" Multiplicity="1" />
+    <End Type="DB_A06236_turnosMedicModel.Presupuestos" Role="Presupuestos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pacientes">
+        <PropertyRef Name="idPaciente" />
+      </Principal>
+      <Dependent Role="Presupuestos">
+        <PropertyRef Name="idPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Presupuestos_dbo_TipoTurnos">
+    <End Type="DB_A06236_turnosMedicModel.TipoTurnos" Role="TipoTurnos" Multiplicity="1" />
+    <End Type="DB_A06236_turnosMedicModel.Presupuestos" Role="Presupuestos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoTurnos">
+        <PropertyRef Name="idTipoTurno" />
+      </Principal>
+      <Dependent Role="Presupuestos">
+        <PropertyRef Name="idTipoTurno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PresupuestosIngresos_dbo_Presupuestos">
+    <End Type="DB_A06236_turnosMedicModel.Presupuestos" Role="Presupuestos" Multiplicity="1" />
+    <End Type="DB_A06236_turnosMedicModel.PresupuestosIngresos" Role="PresupuestosIngresos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Presupuestos">
+        <PropertyRef Name="idPresupuestos" />
+      </Principal>
+      <Dependent Role="PresupuestosIngresos">
+        <PropertyRef Name="idPresupuestos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PresupuestosIngresos_dbo_TiposMoneda">
+    <End Type="DB_A06236_turnosMedicModel.TiposMoneda" Role="TiposMoneda" Multiplicity="1" />
+    <End Type="DB_A06236_turnosMedicModel.PresupuestosIngresos" Role="PresupuestosIngresos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposMoneda">
+        <PropertyRef Name="idTipoMoneda" />
+      </Principal>
+      <Dependent Role="PresupuestosIngresos">
+        <PropertyRef Name="idTipoMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="DB_A06236_turnosMedicModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="DB_A06236_turnosMedicModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="DB_A06236_turnosMedicModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="DB_A06236_turnosMedicModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="DB_A06236_turnosMedicModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="Calendario" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Calendario_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="Calendario" />
+    <NavigationProperty Name="HistorialPacientes" Relationship="DB_A06236_turnosMedicModel.FK_dbo_HistorialPacientes_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="HistorialPacientes" />
+    <NavigationProperty Name="ObrasSociales" Relationship="DB_A06236_turnosMedicModel.FK_dbo_ObrasSociales_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="ObrasSociales" />
+    <NavigationProperty Name="Pacientes" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Pacientes_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="Pacientes" />
+    <NavigationProperty Name="Presupuestos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="Presupuestos" />
+    <NavigationProperty Name="PresupuestosIngresos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="PresupuestosIngresos" />
+    <NavigationProperty Name="Turnos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Turnos_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="Turnos" />
+    <NavigationProperty Name="AspNetRoles" Relationship="DB_A06236_turnosMedicModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="DB_A06236_turnosMedicModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DB_A06236_turnosMedicModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="DB_A06236_turnosMedicModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DB_A06236_turnosMedicModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Calendario_dbo_AspNetUsers_UserId">
+    <End Type="DB_A06236_turnosMedicModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="DB_A06236_turnosMedicModel.Calendario" Role="Calendario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Calendario">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_HistorialPacientes_dbo_AspNetUsers_UserId">
+    <End Type="DB_A06236_turnosMedicModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="DB_A06236_turnosMedicModel.HistorialPacientes" Role="HistorialPacientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HistorialPacientes">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ObrasSociales_dbo_AspNetUsers_UserId">
+    <End Type="DB_A06236_turnosMedicModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DB_A06236_turnosMedicModel.ObrasSociales" Role="ObrasSociales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ObrasSociales">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Pacientes_dbo_AspNetUsers_UserId">
+    <End Type="DB_A06236_turnosMedicModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DB_A06236_turnosMedicModel.Pacientes" Role="Pacientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pacientes">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Presupuestos_dbo_AspNetUsers_UserId">
+    <End Type="DB_A06236_turnosMedicModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="DB_A06236_turnosMedicModel.Presupuestos" Role="Presupuestos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Presupuestos">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PresupuestosIngresos_dbo_AspNetUsers_UserId">
+    <End Type="DB_A06236_turnosMedicModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="DB_A06236_turnosMedicModel.PresupuestosIngresos" Role="PresupuestosIngresos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PresupuestosIngresos">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Turnos_dbo_AspNetUsers_UserId">
+    <End Type="DB_A06236_turnosMedicModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="DB_A06236_turnosMedicModel.Turnos" Role="Turnos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Turnos">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="DB_A06236_turnosMedicModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+    <End Type="DB_A06236_turnosMedicModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
   </Association>
 </Schema>

@@ -12,16 +12,12 @@ namespace MedicinaRegenerativa.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Calendario
+    public partial class AspNetUserLogins
     {
-        public int idCalendario { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
-        public string Hora { get; set; }
-        public int idTurno { get; set; }
-        public Nullable<System.DateTime> FechaCarga { get; set; }
+        public string LoginProvider { get; set; }
+        public string ProviderKey { get; set; }
         public string UserId { get; set; }
     
-        public virtual Turnos Turnos { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }
