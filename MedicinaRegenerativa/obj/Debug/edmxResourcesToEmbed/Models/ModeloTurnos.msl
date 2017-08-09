@@ -106,6 +106,7 @@
     <EntitySetMapping Name="Presupuestos">
       <EntityTypeMapping TypeName="DB_A06236_turnosMedicModel.Presupuestos">
         <MappingFragment StoreEntitySet="Presupuestos">
+          <ScalarProperty Name="idTipoMoneda" ColumnName="idTipoMoneda" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
           <ScalarProperty Name="idEstadoPresupuesto" ColumnName="idEstadoPresupuesto" />

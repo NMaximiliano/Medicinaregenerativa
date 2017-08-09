@@ -145,6 +145,7 @@
     <Property Name="idEstadoPresupuesto" Type="tinyint" Nullable="false" />
     <Property Name="FechaCarga" Type="datetime" />
     <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="idTipoMoneda" Type="tinyint" />
   </EntityType>
   <EntityType Name="PresupuestosIngresos">
     <Key>
@@ -373,6 +374,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_dbo_Presupuestos_dbo_TipoMoneda">
+    <End Role="TiposMoneda" Type="Self.TiposMoneda" Multiplicity="0..1" />
+    <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposMoneda">
+        <PropertyRef Name="idTipoMoneda" />
+      </Principal>
+      <Dependent Role="Presupuestos">
+        <PropertyRef Name="idTipoMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_dbo_Presupuestos_dbo_TipoTurnos">
     <End Role="TipoTurnos" Type="Self.TipoTurnos" Multiplicity="1" />
     <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="*" />
@@ -553,6 +566,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_dbo_Presupuestos_dbo_Pacientes" Association="Self.FK_dbo_Presupuestos_dbo_Pacientes">
       <End Role="Pacientes" EntitySet="Pacientes" />
+      <End Role="Presupuestos" EntitySet="Presupuestos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Presupuestos_dbo_TipoMoneda" Association="Self.FK_dbo_Presupuestos_dbo_TipoMoneda">
+      <End Role="TiposMoneda" EntitySet="TiposMoneda" />
       <End Role="Presupuestos" EntitySet="Presupuestos" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_Presupuestos_dbo_TipoTurnos" Association="Self.FK_dbo_Presupuestos_dbo_TipoTurnos">

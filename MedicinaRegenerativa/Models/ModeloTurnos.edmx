@@ -150,6 +150,7 @@
           <Property Name="idEstadoPresupuesto" Type="tinyint" Nullable="false" />
           <Property Name="FechaCarga" Type="datetime" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="idTipoMoneda" Type="tinyint" />
         </EntityType>
         <EntityType Name="PresupuestosIngresos">
           <Key>
@@ -378,6 +379,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_Presupuestos_dbo_TipoMoneda">
+          <End Role="TiposMoneda" Type="Self.TiposMoneda" Multiplicity="0..1" />
+          <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposMoneda">
+              <PropertyRef Name="idTipoMoneda" />
+            </Principal>
+            <Dependent Role="Presupuestos">
+              <PropertyRef Name="idTipoMoneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Presupuestos_dbo_TipoTurnos">
           <End Role="TipoTurnos" Type="Self.TipoTurnos" Multiplicity="1" />
           <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="*" />
@@ -558,6 +571,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Presupuestos_dbo_Pacientes" Association="Self.FK_dbo_Presupuestos_dbo_Pacientes">
             <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Presupuestos" EntitySet="Presupuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Presupuestos_dbo_TipoMoneda" Association="Self.FK_dbo_Presupuestos_dbo_TipoMoneda">
+            <End Role="TiposMoneda" EntitySet="TiposMoneda" />
             <End Role="Presupuestos" EntitySet="Presupuestos" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Presupuestos_dbo_TipoTurnos" Association="Self.FK_dbo_Presupuestos_dbo_TipoTurnos">
@@ -850,6 +867,10 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_Presupuestos_dbo_TipoMoneda" Association="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_TipoMoneda">
+            <End Role="TiposMoneda" EntitySet="TiposMoneda" />
+            <End Role="Presupuestos" EntitySet="Presupuestos" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ObrasSociales">
           <Key>
@@ -912,6 +933,8 @@
           <NavigationProperty Name="TipoTurnos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_TipoTurnos" FromRole="Presupuestos" ToRole="TipoTurnos" />
           <NavigationProperty Name="PresupuestosIngresos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_Presupuestos" FromRole="Presupuestos" ToRole="PresupuestosIngresos" />
           <NavigationProperty Name="AspNetUsers" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_AspNetUsers_UserId" FromRole="Presupuestos" ToRole="AspNetUsers" />
+          <Property Name="idTipoMoneda" Type="Byte" />
+          <NavigationProperty Name="TiposMoneda" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_TipoMoneda" FromRole="Presupuestos" ToRole="TiposMoneda" />
         </EntityType>
         <EntityType Name="PresupuestosIngresos">
           <Key>
@@ -941,6 +964,7 @@
           <Property Name="FechaCarga" Type="DateTime" Precision="3" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PresupuestosIngresos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_TiposMoneda" FromRole="TiposMoneda" ToRole="PresupuestosIngresos" />
+          <NavigationProperty Name="Presupuestos" Relationship="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_TipoMoneda" FromRole="TiposMoneda" ToRole="Presupuestos" />
         </EntityType>
         <Association Name="FK_dbo_Presupuestos_dbo_EstadosPresupuestos">
           <End Type="DB_A06236_turnosMedicModel.EstadosPresupuestos" Role="EstadosPresupuestos" Multiplicity="1" />
@@ -1200,6 +1224,18 @@
           <End Type="DB_A06236_turnosMedicModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="DB_A06236_turnosMedicModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
+        <Association Name="FK_dbo_Presupuestos_dbo_TipoMoneda">
+          <End Type="DB_A06236_turnosMedicModel.TiposMoneda" Role="TiposMoneda" Multiplicity="0..1" />
+          <End Type="DB_A06236_turnosMedicModel.Presupuestos" Role="Presupuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposMoneda">
+              <PropertyRef Name="idTipoMoneda" />
+            </Principal>
+            <Dependent Role="Presupuestos">
+              <PropertyRef Name="idTipoMoneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1311,6 +1347,7 @@
           <EntitySetMapping Name="Presupuestos">
             <EntityTypeMapping TypeName="DB_A06236_turnosMedicModel.Presupuestos">
               <MappingFragment StoreEntitySet="Presupuestos">
+                <ScalarProperty Name="idTipoMoneda" ColumnName="idTipoMoneda" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
                 <ScalarProperty Name="idEstadoPresupuesto" ColumnName="idEstadoPresupuesto" />

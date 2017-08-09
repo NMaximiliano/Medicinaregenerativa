@@ -43,6 +43,7 @@ namespace MedicinaRegenerativa.Controllers
             
             ViewBag.idEstadoPresupuesto = new SelectList(db.EstadosPresupuestos, "idEstadoPresupuesto", "Descripcion");
             ViewBag.idPaciente = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto");
+            ViewBag.idTipoMoneda = new SelectList(db.TiposMoneda, "idTipoMoneda", "Descripcion");
             ViewBag.idTipoTurno = new SelectList(db.TipoTurnos, "idTipoTurno", "Descripcion");
             ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
@@ -53,7 +54,7 @@ namespace MedicinaRegenerativa.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idPresupuestos,Precio,Cuotas,Observaciones,idPaciente,idTipoTurno,idEstadoPresupuesto,FechaCarga,UserId")] Presupuestos presupuestos)
+        public ActionResult Create([Bind(Include = "idPresupuestos,Precio,Cuotas,Observaciones,idPaciente,idTipoTurno,idEstadoPresupuesto,FechaCarga,UserId, idTipoMoneda")] Presupuestos presupuestos)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +67,7 @@ namespace MedicinaRegenerativa.Controllers
 
             ViewBag.idEstadoPresupuesto = new SelectList(db.EstadosPresupuestos, "idEstadoPresupuesto", "Descripcion", presupuestos.idEstadoPresupuesto);
             ViewBag.idPaciente = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto", presupuestos.idPaciente);
+            ViewBag.idTipoMoneda = new SelectList(db.TiposMoneda, "idTipoMoneda", "Descripcion", presupuestos.idTipoMoneda);
             ViewBag.idTipoTurno = new SelectList(db.TipoTurnos, "idTipoTurno", "Descripcion", presupuestos.idTipoTurno);
             ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", presupuestos.UserId);
             return View(presupuestos);
@@ -86,6 +88,7 @@ namespace MedicinaRegenerativa.Controllers
             
             ViewBag.idEstadoPresupuesto = new SelectList(db.EstadosPresupuestos, "idEstadoPresupuesto", "Descripcion", presupuestos.idEstadoPresupuesto);
             ViewBag.idPaciente = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto", presupuestos.idPaciente);
+            ViewBag.idTipoMoneda = new SelectList(db.TiposMoneda, "idTipoMoneda", "Descripcion", presupuestos.idTipoMoneda);
             ViewBag.idTipoTurno = new SelectList(db.TipoTurnos, "idTipoTurno", "Descripcion", presupuestos.idTipoTurno);
             ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", presupuestos.UserId);
             return View(presupuestos);
@@ -96,7 +99,7 @@ namespace MedicinaRegenerativa.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idPresupuestos,Precio,Cuotas,Observaciones,idPaciente,idTipoTurno,idEstadoPresupuesto,FechaCarga,UserId")] Presupuestos presupuestos)
+        public ActionResult Edit([Bind(Include = "idPresupuestos,Precio,Cuotas,Observaciones,idPaciente,idTipoTurno,idEstadoPresupuesto,FechaCarga,UserId, idTipoMoneda")] Presupuestos presupuestos)
         {
             if (ModelState.IsValid)
             {
@@ -108,6 +111,7 @@ namespace MedicinaRegenerativa.Controllers
             }
             ViewBag.idEstadoPresupuesto = new SelectList(db.EstadosPresupuestos, "idEstadoPresupuesto", "Descripcion", presupuestos.idEstadoPresupuesto);
             ViewBag.idPaciente = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto", presupuestos.idPaciente);
+            ViewBag.idTipoMoneda = new SelectList(db.TiposMoneda, "idTipoMoneda", "Descripcion", presupuestos.idTipoMoneda);
             ViewBag.idTipoTurno = new SelectList(db.TipoTurnos, "idTipoTurno", "Descripcion", presupuestos.idTipoTurno);
             ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", presupuestos.UserId);
             return View(presupuestos);

@@ -24,7 +24,7 @@ namespace MedicinaRegenerativa.Models
         public int idPresupuestos { get; set; }
         [DataType(DataType.Currency)]
         //[DisplayFormat(DataFormatString = "{0:c}")]
-        
+
         public Nullable<decimal> Precio { get; set; }
         public Nullable<byte> Cuotas { get; set; }
         public string Observaciones { get; set; }
@@ -34,6 +34,7 @@ namespace MedicinaRegenerativa.Models
         [Display(Name = "Fecha de Carga")]
         public Nullable<System.DateTime> FechaCarga { get; set; }
         public string UserId { get; set; }
+        public Nullable<byte> idTipoMoneda { get; set; }
     
         public virtual EstadosPresupuestos EstadosPresupuestos { get; set; }
         public virtual Pacientes Pacientes { get; set; }
@@ -41,5 +42,6 @@ namespace MedicinaRegenerativa.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PresupuestosIngresos> PresupuestosIngresos { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual TiposMoneda TiposMoneda { get; set; }
     }
 }

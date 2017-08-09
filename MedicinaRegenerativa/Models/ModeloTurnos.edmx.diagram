@@ -43,6 +43,7 @@
         <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_PresupuestosIngresos_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_Turnos_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="DB_A06236_turnosMedicModel.AspNetUserRoles" />
+        <AssociationConnector Association="DB_A06236_turnosMedicModel.FK_dbo_Presupuestos_dbo_TipoMoneda" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

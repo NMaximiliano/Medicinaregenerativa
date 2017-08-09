@@ -16,6 +16,9 @@
             @Html.DisplayNameFor(model => model.Precio)
         </th>
         <th>
+            Moneda
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Cuotas)
         </th>
         <th>
@@ -43,6 +46,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Precio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TiposMoneda.Descripcion)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Cuotas)

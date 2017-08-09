@@ -18,6 +18,7 @@ namespace MedicinaRegenerativa.Models
         public TiposMoneda()
         {
             this.PresupuestosIngresos = new HashSet<PresupuestosIngresos>();
+            this.Presupuestos = new HashSet<Presupuestos>();
         }
     
         public byte idTipoMoneda { get; set; }
@@ -27,5 +28,7 @@ namespace MedicinaRegenerativa.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PresupuestosIngresos> PresupuestosIngresos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Presupuestos> Presupuestos { get; set; }
     }
 }

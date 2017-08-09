@@ -20,7 +20,13 @@
         <dd>
             @Html.DisplayFor(model => model.Precio)
         </dd>
+        <dt>
+            Moneda
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.TiposMoneda.Descripcion)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Cuotas)
         </dt>
