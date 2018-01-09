@@ -15,15 +15,17 @@
 {
 <p>
     @*@Html.ActionLink("Crear Nuevo", "Create", new { fecha = "2017/11/15" })*@
-    
+    <hr />
     @Html.Hidden("fechaBusqueda", fechaHoy)
-    <input type="submit" value="Crear Nuevo" class="btn btn-default" />
+    <input type="submit" value="Nuevo turno" class="btn btn-default" />
+    <hr />
 </p>
 }
 <section id="FiltrosTurnos">
     
         <div class="form-horizontal">
-            <h4>Filtros</h4>
+            <h4>Seleccione una fecha</h4>
+            <br />
             <div style="overflow:hidden;">
                 <div class="form-group">
                     <div class="row">

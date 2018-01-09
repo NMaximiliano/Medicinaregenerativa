@@ -18,6 +18,7 @@ namespace MedicinaRegenerativa.Controllers
         // GET: Presupuestos
         public ActionResult Index()
         {
+            ViewBag.PacientesNombres = new SelectList(db.Pacientes, "idPaciente", "NombreCompleto"); ;
             var presupuestos = db.Presupuestos.Include(p => p.EstadosPresupuestos).Include(p => p.Pacientes).Include(p => p.TipoTurnos).Include(p => p.AspNetUsers);
             return View(presupuestos.ToList());
         }
@@ -150,6 +151,12 @@ namespace MedicinaRegenerativa.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [HttpPost]
+        public PartialViewResult ObtenerPresupuestos(int PacientesNombres)
+        {
+            var presupuestos = db.Presupuestos.Where(x => x.idPaciente == PacientesNombres);
+            return PartialView("_ListadoPresupuestos", presupuestos);
         }
     }
 }
