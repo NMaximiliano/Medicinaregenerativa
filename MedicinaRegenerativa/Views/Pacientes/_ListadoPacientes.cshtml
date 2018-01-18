@@ -71,6 +71,7 @@
                 @Html.ActionLink("Editar", "Edit", new { id = item.idPaciente }) |
                 @Html.ActionLink("Detalle", "Details", new { id = item.idPaciente }) |
                 @Html.ActionLink("Borrar", "Delete", new { id = item.idPaciente })
+                @Html.ActionLink("Imprimir", "PdfPacientes", new { id = item.idPaciente })
             </td>
         </tr>
     }

@@ -39,7 +39,20 @@ namespace MedicinaRegenerativa.Controllers
             }
             return View(pacientes);
         }
-
+        public ActionResult PdfPacientes(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Pacientes pacientes = db.Pacientes.Find(id);
+            if (pacientes == null)
+            {
+                return HttpNotFound();
+            }
+            return View(pacientes);
+            
+        }
         // GET: Pacientes/Create
         public ActionResult Create()
         {

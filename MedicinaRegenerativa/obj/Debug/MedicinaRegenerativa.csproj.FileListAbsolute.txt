@@ -254,3 +254,5 @@ C:\Users\Maximiliano\Source\Repos\Medicinaregenerativa\MedicinaRegenerativa\bin\
 C:\Users\Maximiliano\Source\Repos\Medicinaregenerativa\MedicinaRegenerativa\obj\Debug\MedicinaRegenerativa.dll
 C:\Users\Maximiliano\Source\Repos\Medicinaregenerativa\MedicinaRegenerativa\obj\Debug\MedicinaRegenerativa.pdb
 C:\Users\Maximiliano\Source\Repos\Medicinaregenerativa\MedicinaRegenerativa\obj\Debug\MedicinaRegenerativa.csprojResolveAssemblyReference.cache
+C:\Users\Maximiliano\Source\Repos\Medicinaregenerativa\MedicinaRegenerativa\bin\itextsharp.dll
+C:\Users\Maximiliano\Source\Repos\Medicinaregenerativa\MedicinaRegenerativa\bin\RazorPDF.dll
